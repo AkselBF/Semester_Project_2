@@ -1,15 +1,57 @@
 {
   "name": "semester_project_2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Testing",
   "main": "index.js",
   "scripts": {
-    "tailwind": "npx tailwindcss -i ./src/css/styles.css -o ./dist/output.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/css/styles.css -o ./dist/output.css --watch",
+    "format": "prettier -w src/**/*.js",
+    "lint": "eslint src/**/*.js",
+    "lint-fix": "eslint src/**/*.js --cache --fix",
+    "prepare": "husky install",
+    "test-unit": "jest",
+    "test": "npm run test-unit && npm run test-e2e-cli",
+    "test-e2e": "cypress open",
+    "test-e2e-report": "cypress run --reporter mochawesome",
+    "test-e2e-cli": "cypress run"
+  },
+  "jest": {
+    "resetMocks": false,
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "cypress": "^13.5.1",
+    "eslint": "^8.53.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-jest": "^27.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
     "tailwindcss": "^3.3.5"
+  },
+  "lint-staged": {
+    "src/*/.js": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "index.js": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    ".html": [
+      "prettier --write"
+    ],
+    ".css": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "jest": "^29.7.0"
   }
 }
