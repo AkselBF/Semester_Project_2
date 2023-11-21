@@ -3,31 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Login_page" content="Where users register or login for full use of app">
-  <title>Login page</title>
+  <meta name="login_page" content="Users either register their data or use it to login">
+  <title>Login/registration page</title>
 
   <link rel="stylesheet" href="./dist/output.css">
+  <script type="module" src="./src/js/ui/header.js"></script>
 </head>
-<body class="bg-black text-white">
-  <header class="bg-darker_gray text-white sticky">
-    <section class="max-w-4xl mx-auto p-4 flex justify-between items-center">
-      <h1 class="text-3xl font-medium">Menu</h1>
-      <div>
-        <button id="mobil-open-menu" 
-        class="text-3xl sm:hidden 
-        focus:outline-none">
-          &#9776;
-        </button>
-      </div>
+<body class="bg-gradient-to-bl from-login_full to-black text-white relative">
+  <header class="bg-darker_gray sticky">
+    <section class="max-w-full p-4 flex justify-between items-center">
+      <h1 class="text-3xl mx-4 font-medium">Menu</h1>
+
+      <button id="hamburger-button" class="text-3xl mx-4 md:hidden cursor-pointer relative w-8 h-8">
+        <div class="bg-white w-8 h-1 rounded 
+        absolute top-4 -mt-0.5 transition-all 
+        duration-500 before:content-[''] 
+        before:bg-white before:w-8 before:h-1 
+        before:rounded before:absolute 
+        before:-translate-x-4 
+        before:-translate-y-3 
+        before:transition-all 
+        before:duration-500 
+        after:content-[''] after:bg-white 
+        after:w-8 after:h-1 after:rounded 
+        after:absolute 
+        after:-translate-x-4 
+        after:translate-y-3 
+        after:transition-all 
+        after:duration-500">
+        </div>
+      </button>
+  
+      <nav class="hidden md:flex space-x-8 text-xl flex-grow" aria-label="main">
+        <div class="flex justify-center flex-grow">
+          <a href="./src/html/home.html" class="hover:opacity-90 mx-4">Home</a>
+          <a href="./src/html/profile.html" class="hover:opacity-90 mx-4">Profile</a>
+          <a href="./src/html/listings.html" class="hover:opacity-90 mx-4">Listings</a>
+        </div>
+        <div class="flex">
+          <a href="#" class="hover:opacity-90 mx-4">Login</a>
+          <a href="#" class="hover:opacity-90 mx-4">Logout</a>
+        </div>
+      </nav>
+    </section>
+
+    <section id="mobile-menu" 
+    class="absolute top-68 bg-trans_black w-full text-3xl flex-col justify-center origin-top animate-open-menu hidden">
+      <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
+        <a href="#" class="w-full text-center py-6 hover:opacity-90">Home</a>
+        <a href="./src/html/profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
+        <a href="./src/html/listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="./src/html/login.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
+        <a href="#" class="w-full text-center py-6 hover:opacity-90">Logout</a>
+      </nav>
     </section>
   </header>
 
-  <main>
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  </main>
+  <main class="bg-black px-8 pt-16 pb-12 md:px-16 lg:px-24 xl:px-52 2xl:px-52 
+  flex flex-col md:flex-row content-center md:items-center md:justify-between">
+    <div class="mb-8 md:mb-0 md:mr-8 lg:w-80 xl:w-96 m-auto md:m-0">
+      <h1 class="text-3xl font-bold mb-2 md:mb-4">Welcome to the</h1>
+      <h1 class="text-4xl text-gold italic underline font-bold">Day-Night Auction</h1>
 
-  <footer></footer>
+      <p class="text-lg md:mb-4 mt-8 md:mt-16 w-64 md:w-72 lg:w-96">
+        Find any and all types of items in here. 
+        To make bothe day and night eventfull is our purpose. 
+        Be sure to enjoy yourself!
+      </p>
+    </div>
+  
+    <div class="flex flex-col md:flex-col md:gap-4 mt-8 md:mt-36 m-auto md:m-0">
+      <button class="w-56 sm:w-64 md:w-72 py-2 bg-button_blue text-white text-xl font-semibold 
+      rounded-md mt-4 mb-2 md:mb-0">
+        Login
+      </button>
+      <button class="w-56 sm:w-64 md:w-72 py-2 bg-button_blue text-white text-xl font-semibold 
+      rounded-md mt-2 mb-4">
+        Register
+      </button>
+    </div>
+  </main>
 </body>
 </html>
