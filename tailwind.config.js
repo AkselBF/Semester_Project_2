@@ -2,11 +2,20 @@
 module.exports = {
   content: [
   "./index.html", 
-  "./src/html/*.html", 
-  "./src/js/ui/*.js"
+  "./src/html/pages/*.html", 
+  "./src/js/ui/*.js",
+  "./src/js/ui/forms/*.js"
 ],
   theme: {
     extend: {
+      width: {
+        '808': '808px',
+      },
+      height: {
+        '426': '426px',
+        '460': '460px',
+        '500': '500px',
+      },
       screens: {
         'tablet': '640px',
         'laptop': '1024px',
@@ -31,6 +40,7 @@ module.exports = {
       'trans_black': '#000000cc',
       'dark_gray': '#1E1E1E',
       'darker_gray': '#171717',
+      'blue': '#3A4DF2',
       'button_blue': '#1D48E2',
       'login_blue': '#3A7DFFD1',
       'login_second': '#002978B3',

@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="profile_page" content="Users can see their user data and what items they've purchased">
-  <title>Profile page</title>
+  <meta name="listings_page" content="Users can see items at play and can sell or buy ig logged in">
+  <title>Listings page</title>
 
-  <link rel="stylesheet" href="../../dist/output.css">
+  <link rel="stylesheet" href="../../../dist/output.css">
+  <script type="module" src="../../js/ui/header.js"></script>
 </head>
 <body class="text-white relative">
   <header class="bg-darker_gray sticky">
     <section class="max-w-full p-4 flex justify-between items-center">
-      <h1 class="text-3xl mx-4 font-medium">Menu</h1>
+      <h1 class="text-3xl mx-4 font-medium">DNA</h1>
 
       <button id="hamburger-button" class="text-3xl mx-4 md:hidden cursor-pointer relative w-8 h-8">
         <div class="bg-white w-8 h-1 rounded 
@@ -36,11 +37,11 @@
       <nav class="hidden md:flex space-x-8 text-xl flex-grow" aria-label="main">
         <div class="flex justify-center flex-grow">
           <a href="./home.html" class="hover:opacity-90 mx-4">Home</a>
-          <a href="#" class="hover:opacity-90 mx-4">Profile</a>
-          <a href="./listings.html" class="hover:opacity-90 mx-4">Listings</a>
+          <a href="./profile.html" class="hover:opacity-90 mx-4">Profile</a>
+          <a href="#" class="hover:opacity-90 mx-4">Listings</a>
         </div>
         <div class="flex">
-          <a href="../../index.html" class="hover:opacity-90 mx-4">Login</a>
+          <a href="../../../index.html" class="hover:opacity-90 mx-4">Login</a>
           <a href="#" class="hover:opacity-90 mx-4">Logout</a>
         </div>
       </nav>
@@ -51,9 +52,9 @@
 
       <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
         <a href="./home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
-        <a href="#" class="w-full text-center py-6 hover:opacity-90">Profile</a>
-        <a href="./listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
-        <a href="../../index.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
+        <a href="./profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
+        <a href="#" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="../../../index.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
         <a href="#" class="w-full text-center py-6 hover:opacity-90">Logout</a>
       </nav>
     </section>
