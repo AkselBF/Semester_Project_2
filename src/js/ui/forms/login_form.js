@@ -1,4 +1,4 @@
-import { loginUser } from "../../api/auth/api.js";
+import { loginUser } from "../../api/auth/login.js";
 
 // Get necessary elements by their IDs
 const loginButton = document.querySelector('#login_button');

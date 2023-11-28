@@ -1,18 +1,16 @@
 import { baseUrl } from '../constants.js';
-import { loadToken } from '../../storage/token.js';
+import { headers } from '../headers.js';
+import { load } from '../../storage/index.js';
 
 // Function to make authenticated API requests
 export const authenticatedRequest = async (endpoint, method = 'GET', data = null) => {
-  const token = loadToken();
+  const token = load();
 
   console.log(data);
 
   const requestOptions = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
+    headers: headers('application/json'),
     body: data ? JSON.stringify(data) : null,
   };
 
@@ -29,6 +27,7 @@ export const authenticatedRequest = async (endpoint, method = 'GET', data = null
   }
 };
 
+/*
 // Example function for registration request
 export const registerUser = async (name, email, password, avatar) => {
   try {
@@ -48,9 +47,8 @@ export const loginUser = async (email, password) => {
   try {
     const data = { email: email, password: password };
     const response = await authenticatedRequest('auth/login', 'POST', data);
-    //const jsonResponse = await response.json();
-    // Handle response data here
     
+    // Handle response data
     if (response.accessToken) {
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("name", response.name || '');
@@ -58,12 +56,9 @@ export const loginUser = async (email, password) => {
       localStorage.setItem("avatar", response.avatar || '');      
       localStorage.setItem("credits", response.credits || '');
 
-      //localStorage.setItem("credits", jsonResponse.credits);
+      window.location.href = '../../../html/pages/profile.html';
 
       console.log(response);
-
-      window.location.href = '../../../../index.html';
-
       return response;
     } else {
       throw new Error('Invalid response format: No accessToken found.');
@@ -74,3 +69,4 @@ export const loginUser = async (email, password) => {
     throw error;
   }
 };
+*/

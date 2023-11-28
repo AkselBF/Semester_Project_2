@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="profile_page" content="Users can see their user data and what items they've purchased">
-  <title>Profile page</title>
+  <meta name="details_page" content="Page where the product details are written">
+  <title>Details page</title>
 
   <link rel="stylesheet" href="../../../dist/output.css">
 
   <script type="module" src="../../js/ui/header.js"></script>
   <script type="module" src="../../js/api/auth/logout.js"></script>
 
-  <script type="module" src="../../js/pages/profile.js"></script>
+  <script type="module" src="../../js/pages/details.js"></script>
 </head>
-<body class="text-white relative">
-  <header class="bg-darker_gray sticky">
+<body>
+  <header class="bg-darker_gray sticky text-white">
     <section class="max-w-full p-4 flex justify-between items-center">
       <h1 class="text-3xl mx-4 font-medium">DNA</h1>
 
@@ -41,12 +41,12 @@
       <nav class="hidden md:flex space-x-8 text-xl flex-grow" aria-label="main">
         <div class="flex justify-center flex-grow">
           <a href="./home.html" class="hover:opacity-90 mx-4">Home</a>
-          <a href="#" class="hover:opacity-90 mx-4">Profile</a>
+          <a href="./profile.html" class="hover:opacity-90 mx-4">Profile</a>
           <a href="./listings.html" class="hover:opacity-90 mx-4">Listings</a>
         </div>
         <div class="flex">
           <a href="../../../index.html" class="hover:opacity-90 mx-4">Login</a>
-          <a href="#" id="logout" class="hover:opacity-90 mx-4">Logout</a>
+          <a href="#" class="hover:opacity-90 mx-4">Logout</a>
         </div>
       </nav>
     </section>
@@ -56,8 +56,8 @@
 
       <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
         <a href="./home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
-        <a href="#" class="w-full text-center py-6 hover:opacity-90">Profile</a>
-        <a href="./listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="./profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
+        <a href="#" class="w-full text-center py-6 hover:opacity-90">Listings</a>
         <a href="../../../index.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
         <a href="#" class="w-full text-center py-6 hover:opacity-90">Logout</a>
       </nav>
@@ -65,33 +65,7 @@
   </header>
 
   <main>
-    <section class="mt-0 mb-12 justify-center text-left text-black">
-      <div class="max-w-full mx-auto bg-blue h-44 w-full top-0 left-0 mt--8">
-        <div class="relative mt-0 flex justify-center">
-          <img id="profile_avatar" class="rounded-full mx-auto w-36 h-36 mt-16"></img>
-        </div>
-      </div>
-
-      <div class="mt-16 text-black items-center justify-center mx-auto mb-6 w-64">
-        <h3 id="profile_name" class="text-center text-2xl font-semibold my-4"></h3>
-        <div id="profile_avatar" class="w-64 h-0.5 mx-auto my-4 bg-black rounded-full" src=""></div>
-        <p id="profile_email" class="my-2 text-center"></p>
-        <p id="profile_credits" class="my-2 text-center"></p>
-      </div>
-    </section>
-
-    <section class="bg-black text-white pt-4 pb-12">
-      <h3 class="text-center text-xl font-semibold mt-4 mb-8 underline">
-        Purchased listings:
-      </h3>
-
-      <div class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center">
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-      </div>
-    </section>
+    <div id="listing_details"></div>
   </main>
 </body>
 </html>

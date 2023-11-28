@@ -9,6 +9,8 @@
   <script src="https://kit.fontawesome.com/26fd6b155e.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="../../../dist/output.css">
+  <link rel="stylesheet" href="../../css/home.css">
+
   <script type="module" src="../../js/ui/header.js"></script>
 </head>
 <body class="text-white relative">
@@ -79,7 +81,7 @@
       <div class="bg-black mt-12 mb-16 h-0.5 rounded-full mx-auto w-1/2 md:w-1/3 lg:w-1/4"></div>
     </section>
 
-    <section class="justify-center mb-20">
+    <section class="justify-center mb-10">
       <div class="justify-center text-center flex flex-col lg:flex-row">
         <div class="flex flex-col mx-auto w-60">
           <img src="../../images/sell icon.png" class="rounded-full w-20 h-20 mx-auto">
@@ -100,12 +102,85 @@
         </div>
       </div>
 
-      <div></div>
+      <div class="flex flex-col lg:flex-row mt-5">
+        <div class="bg-dark_gray items-center w-full justify-center text-center p-10">
+          <img src="../../images/icomoon-free_price-tags.png" class="w-14 h-11 mx-auto my-5">
+          <div class="bg-white w-2/3 md:w-1/3 h-0.5 rounded-full mx-auto my-5"></div>
+          <p class="text-white font-semibold w-1/2 md:w-1/4 mx-auto my-5">
+            Gain credits by selling listings!
+          </p>
+        </div>
+        
+        <div class="bg-gradient-to-l from-home_blue_one to-home_blue_two 
+        items-center w-full justify-center text-center p-10">
+          <img src="../../images/icon-park-outline_buy.png" class="w-14 h-14 mx-auto my-5">
+          <div class="bg-black w-2/3 md:w-1/3 h-0.5 rounded-full mx-auto my-5"></div>
+          <p class="text-black font-semibold w-1/2 md:w-1/4 mx-auto my-5">
+            Buy your listings using credits!
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section></section>
+    <section id="svg_container" class="w-90% lg:w-80% justify-center">
+      <svg id="svg_main" class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="656" height="420" viewBox="0 0 656 420" fill="none">
+        <path d="M0 0H655.5C655.5 0 592.5 78.5 592.5 153.5C592.5 204.041 632.5 215.459 632.5 266C632.5 343.5 530.5 420 530.5 420H0V0Z" fill="#1E1E1E"/>
+      </svg>
+
+      <div id="svg_elements" class="bg-dark_gray md:bg-none pb-16 pt-4 md:p-1 
+      text-white text-center items-start w-full md:w-1/2">
+        <h3 class="text-2xl mx-auto mt-1 md:mt-10 mb-3">What can be gained</h3>
+        <div class="w-1/2 h-0.5 bg-white mx-auto mb-3 rounded-full"></div>
+        <p class="w-11/12 sm:w-9/12 md:w-3/4 lg:w-2/3 mx-auto mb-10">
+          The main purpose of this site is to find suitable listings, and should you have enough credits, use them to get the item you want. In the event you should run out or not have enough credits, you can sell your own listings in order to gain credits. Now, time for the main event, and have a good time!
+        </p>
+        <a href="./listings.html" class="text-black text-lg font-semibold 
+        bg-home_blue_two rounded-xl px-10 py-2 cursor-pointer my-3">
+          Get started
+        </a>
+      </div>
+
+      <svg id="svg_edge" class="hidden md:block" xmlns="http://www.w3.org/2000/svg" width="713" height="420" viewBox="0 0 713 420" fill="none">
+        <path d="M0 0H713C713 0 624 79 624 154C624 204.541 655.5 203.959 655.5 254.5C655.5 332 540.5 420 540.5 420H0V0Z" fill="#10FFFF"/>
+      </svg>
+      <img id="svg_image" class="hidden md:block" src="../../images/home_add.png">
+    </section>
   </main>
 
-  <footer></footer>
+  <footer class="bg-darker_gray text-white text-center mt-1 md:mt-10 p-4">
+    <h3 class="text-2xl font-semibold my-3">Contact us</h3>
+    <div class="w-1/2 md:w-1/4 h-0.5 bg-white mx-auto mb-3 rounded-full"></div>
+
+    <div id="footer_info" class="my-10 flex flex-col lg:flex-row w-full lg:px-16 justify-between">
+      <div class="flex flex-col mx-auto lg:mx-1">
+        <div class="flex flex-row">
+          <p class="mr-2 font-semibold">E-mail:</p>
+          <p>username@noroff.stud.no</p>
+        </div>
+        <div class="flex flex-row">
+          <p class="mr-2 font-semibold">Phone:</p>
+          <p>+47 38 00 00 00</p>
+        </div>
+        <div class="flex flex-row">
+          <p class="mr-2 font-semibold">Address:</p>
+          <p>Tordensjolds gate 11</p>
+        </div>
+      </div>
+
+      <div class="mx-auto my-10 lg:my-0 w-1/3">
+        <p>Contact us at any time should you have any problems in our site, or if you are unsure about something in our site! We're open every day save sunday. </p>
+      </div>
+
+      <div class="mx-auto lg:mx-1">
+        <p class="font-semibold text-left lg:mx-4">Social platforms:</p>
+        <div class="my-10 flex flex-row lg:mx-4">
+          <i class="fa-brands fa-facebook fa-2xl mr-4" style="color: #ffffff;"></i>
+          <i class="fa-brands fa-twitter fa-2xl mx-4" style="color: #ffffff;"></i>
+          <i class="fa-brands fa-instagram fa-2xl mx-4" style="color: #ffffff;"></i>
+          <i class="fa-brands fa-linkedin fa-2xl ml-4" style="color: #ffffff;"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

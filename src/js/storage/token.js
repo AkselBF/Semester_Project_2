@@ -12,3 +12,12 @@ export const loadToken = () => {
 export const removeToken = () => {
   localStorage.removeItem('accessToken');
 };
+
+/*
+export const saveUserData = (userData) => {
+  localStorage.setItem('name', userData.name || '');
+  localStorage.setItem('email', userData.email || '');
+  localStorage.setItem('avatar', userData.avatar || '');
+  localStorage.setItem('credits', userData.credits || '');
+};
+*/

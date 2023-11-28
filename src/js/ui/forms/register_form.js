@@ -1,4 +1,4 @@
-import { registerUser } from "../../api/auth/api.js";
+import { registerUser } from "../../api/auth/register.js";
 
 // Get necessary elements by their IDs
 const registerButton = document.querySelector('#register_button');
