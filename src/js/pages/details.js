@@ -1,59 +1,9 @@
 import { getSearchParams } from '../router/searchParams.js';
-import { baseUrl } from '../api/constants.js';
+import { load } from '../storage/index.js';
 
-async function fetchListingDetails(listingId) {
-  try {
-    const response = await fetch(`${baseUrl}/listings/${listingId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
-      }
-    });
+// Retrieve listings from localStorage
+const listings = load('listingsData');
 
-    if (response.ok) {
-      const data = await response.json();
-      displayListingDetails(data);
-      console.log(data);
-    } 
-    else {
-      console.log('Failed to fetch post details');
-    }
-  } 
-  catch (error) {
-    console.error('Error fetching post details:', error);
-  }
-}
-
-const populateListingDetails = (listing) => {
-  const detailsContainer = document.querySelector('#listing_details');
-
-  // Left side on larger screens, top on smaller screens
-  const leftSideHTML = `
-    <div class="lg:w-1/2">
-      <h2 class="text-3xl font-bold mb-4 lg:mb-8">${listing.title}</h2>
-      <p class="mb-4 lg:mb-8">${listing.description}</p>
-      <div class="mb-4 lg:mb-8">${listing.created}, ${listing.updated}, ${listing.endsAt}</div>
-    </div>
-  `;
-
-  // Right side on larger screens, bottom on smaller screens
-  const rightSideHTML = `
-    <div class="lg:w-1/2">
-      <img src="${listing.media}" alt="Media" class="mb-4 lg:mb-8">
-      <p class="mb-4 lg:mb-8">${listing.bids}</p>
-      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Button</button>
-    </div>
-  `;
-
-  // Display details based on screen size
-  if (window.innerWidth >= 1024) {
-    detailsContainer.innerHTML = `<div class="flex flex-col lg:flex-row lg:space-x-8">${leftSideHTML}${rightSideHTML}</div>`;
-  } else {
-    detailsContainer.innerHTML = `${leftSideHTML}${rightSideHTML}`;
-  }
-};
-
-// Call the function to get URL parameters
 const params = getSearchParams();
 const listingId = params.id;
 
@@ -61,6 +11,59 @@ const listingId = params.id;
 const selectedListing = listings.find(listing => listing.id === listingId);
 
 if (selectedListing) {
-  fetchListingDetails(selectedListing);
-  populateListingDetails(selectedListing);
+  // Title
+  const titleElement = document.createElement('h2');
+  titleElement.textContent = selectedListing.title;
+  titleElement.className = 'text-3xl my-3 md:my-6 text-left font-semibold'; // Tailwind classes
+  document.querySelector('#listing_title').appendChild(titleElement);
+
+  // Media
+  const mediaElement = document.createElement('img');
+  mediaElement.src = selectedListing.media[0];
+  mediaElement.alt = selectedListing.title;
+  mediaElement.className = 'mx-auto w-300 max-h-[300px] rounded-t-lg'; // Tailwind classes
+  document.querySelector('#listing_bid').appendChild(mediaElement);
+
+  // Bids text
+  const textElement = document.createElement('p');
+  textElement.textContent = 'Number of bids';
+  textElement.className = 'text-left mx-10 mt-5';
+  document.querySelector('#listing_bid').appendChild(textElement);
+
+  // Number of bids
+  const bidsElement = document.createElement('p');
+  bidsElement.textContent = `${selectedListing._count.bids}`;
+  bidsElement.className = 'text-left mx-10 font-semibold';
+  document.querySelector('#listing_bid').appendChild(bidsElement);
+
+  // Bids Button
+  const bidsButtonElement = document.createElement('button');
+  bidsButtonElement.textContent = 'Place bid';
+  bidsButtonElement.className = 'bid_button bg-listing_button font-semibold text-white mx-5 mt-4 mb-6 w-56 py-2 rounded-lg';
+  document.querySelector('#listing_bid').appendChild(bidsButtonElement);
+
+  // Description
+  const descriptionElement = document.createElement('p');
+  descriptionElement.textContent = selectedListing.description;
+  descriptionElement.className = 'mt-4 md:mt-2 text-left';
+  document.querySelector('#listing_desc').appendChild(descriptionElement);
+
+  // Dates Section (Created, Updated, EndsAt)
+  const datesSection = document.createElement('div');
+  datesSection.className = 'mt-4 md:mt-12 text-left';
+
+  // Individual Date Elements
+  const createdDateElement = document.createElement('p');
+  createdDateElement.textContent = `Created: ${selectedListing.created}`;
+  datesSection.appendChild(createdDateElement);
+
+  const updatedDateElement = document.createElement('p');
+  updatedDateElement.textContent = `Updated: ${selectedListing.updated}`;
+  datesSection.appendChild(updatedDateElement);
+
+  const endsAtDateElement = document.createElement('p');
+  endsAtDateElement.textContent = `Ends At: ${selectedListing.endsAt}`;
+  datesSection.appendChild(endsAtDateElement);
+
+  document.querySelector('#listing_dates').appendChild(datesSection);
 }

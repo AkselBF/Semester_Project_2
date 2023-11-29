@@ -7,13 +7,16 @@
   <title>Details page</title>
 
   <link rel="stylesheet" href="../../../dist/output.css">
+  <link rel="stylesheet" href="../../css/modal.css">
 
   <script type="module" src="../../js/ui/header.js"></script>
   <script type="module" src="../../js/api/auth/logout.js"></script>
 
   <script type="module" src="../../js/pages/details.js"></script>
+  <script type="module" src="../../js/ui/forms/bid_form.js"></script>
 </head>
-<body>
+<body class="bg-gradient-to-tl from-details_dark_bg via-details_bg to-details_dark_bg
+text-white h-full relative bg-no-repeat bg-cover min-h-screen">
   <header class="bg-darker_gray sticky text-white">
     <section class="max-w-full p-4 flex justify-between items-center">
       <h1 class="text-3xl mx-4 font-medium">DNA</h1>
@@ -57,15 +60,50 @@
       <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
         <a href="./home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
         <a href="./profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
-        <a href="#" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="./listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
         <a href="../../../index.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
         <a href="#" class="w-full text-center py-6 hover:opacity-90">Logout</a>
       </nav>
     </section>
   </header>
 
-  <main>
-    <div id="listing_details"></div>
+  <main class="h-full p-5">
+    <div id="listing_details" class="flex flex-col-reverse md:flex-row 
+    justify-center items-center md:items-start">
+      <div id="listing_place" class="flex flex-col md:mr-10">
+        <div id="listing_title" class="left_side"></div>
+        <div id="listing_desc" class="left_side"></div>
+        <div id="listing_dates" class="left_side text-left mt-3 mb-10"></div>
+      </div>
+
+      <div id="listing_bid" class="right_side my-6 bg-dark_gray 
+      rounded-lg justify-center text-center md:ml-10"></div>
+    </div>
+
+    <!-- 
+      Bids form
+    -->
+    <div id="bids_form" class="bg-trans_black justify-center hidden">
+      <form id="bid_form" 
+      class="bg-dark_gray rounded-lg w-[300px] h-[300px] items-center flex flex-col">
+        <div id="bid_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
+          &times;
+        </div>
+        
+        <!-- Form description -->
+        <h2 class="text-2xl font-semibold mb-3">Type in your bid</h2>
+        <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
+
+        <!-- Bids form field -->
+        <input id="bid_amount" type="text" placeholder="Bid amount" name="bid" 
+        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        
+        <button id="submit_bid" type="submit" 
+        class="rounded-full bg-listing_button text-white font-semibold w-2/3 px-4 py-2 mt-8">
+          Confirm bid
+        </button>
+      </form>
+    </div>
   </main>
 </body>
 </html>

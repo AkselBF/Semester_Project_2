@@ -5,6 +5,7 @@ module.exports = {
   "./src/html/pages/*.html", 
   "./src/js/ui/*.js",
   "./src/js/ui/forms/*.js",
+  ".src/js/ui/components/*.js",
   "./src/js/pages/*.js"
 ],
   theme: {
@@ -18,6 +19,7 @@ module.exports = {
       },
       height: {
         '262': '262px',
+        '300': '300px',
         '356': '356px',
         '426': '426px',
         '460': '460px',
@@ -58,6 +60,8 @@ module.exports = {
       'listing_title_one': '#000AFF',
       'listing_title_two': '#000587',
       'listing_button': '#2965FF',
+      'details_bg': '#0F113E',
+      'details_dark_bg': '#040517',
       'gold': '#E7C200'
     },
   },

@@ -1,4 +1,5 @@
 import { baseUrl } from '../api/constants.js';
+import { save } from '../storage/index.js';
 
 // Function to fetch listings from the API
 const fetchListings = async () => {
@@ -33,7 +34,7 @@ const displayListings = (listings) => {
       <div class="w-300 my-2">
         <div class="flex flex-col-reverse">
           <div class="flex flex-row bg-trans_black py-2 px-4 justify-between">
-            <h3>${listing.title}</h3>
+            <h3 class="listing_search">${listing.title}</h3>
             <p>${listing.endsAt}</p>
           </div>
           <img src="${listing.media[0]}" alt="${listing.title}" 
@@ -58,6 +59,7 @@ const displayListings = (listings) => {
 
 fetchListings()
   .then(listings => {
+    save('listingsData', listings)
     console.log('Fetched Listings:', listings);
     displayListings(listings);
   })
