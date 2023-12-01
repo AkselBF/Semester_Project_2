@@ -4,7 +4,7 @@ import { save } from '../storage/index.js';
 // Function to fetch listings from the API
 export const fetchListings = async () => {
   try {
-    const response = await fetch(`${baseUrl}listings?_active=true`);
+    const response = await fetch(`${baseUrl}listings?_active=true&sort=created`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch listings');

@@ -11,9 +11,11 @@
   <link rel="stylesheet" href="../../../dist/output.css">
   <link rel="stylesheet" href="../../css/avatar_update.css">
   <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/profile_listings.css">
 
   <script type="module" src="../../js/ui/header.js"></script>
   <script type="module" src="../../js/api/auth/logout.js"></script>
+  <script type="module" src="../../js/api/auth/profile_listings.js"></script>
 
   <script type="module" src="../../js/pages/profile.js"></script>
   <script type="module" src="../../js/ui/forms/update_form.js"></script>
@@ -81,7 +83,7 @@
         </div>
       </div>
 
-      <!-- Form to update avatar (initially hidden) -->
+      <!-- Form to update avatar -->
       <div id="update_avatar_form" class="bg-trans_black justify-center hidden">
         <form id="update_form" 
         class="bg-dark_gray text-white rounded-lg w-[300px] h-[300px] items-center flex flex-col">
@@ -117,12 +119,8 @@
         Purchased listings:
       </h3>
 
-      <div class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center">
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-        <div class="w-64 h-80 bg-blue rounded-lg"></div>
-      </div>
+      <div id="winning_listings" 
+      class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center"></div>
     </section>
   </main>
 </body>
