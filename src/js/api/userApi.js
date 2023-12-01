@@ -3,7 +3,7 @@ import { authenticatedRequest } from './auth/api.js';
 // Function to fetch user profile data
 export const fetchUserProfile = async () => {
   try {
-    const endpoint = 'profile'; // Adjust to the actual endpoint for fetching user profile data
+    const endpoint = 'profile';
     const response = await authenticatedRequest(endpoint);
     return response;
   } catch (error) {
@@ -14,8 +14,8 @@ export const fetchUserProfile = async () => {
 
 export const fetchUserData = async () => {
   try {
-    const response = await authenticatedRequest('user'); // Assuming 'user' is the endpoint to fetch user details
-    return response; // Assuming the API returns user data in JSON format
+    const response = await authenticatedRequest('user');
+    return response;
   } catch (error) {
     throw new Error('Failed to fetch user data');
   }

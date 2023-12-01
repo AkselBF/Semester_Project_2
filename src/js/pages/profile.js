@@ -18,30 +18,5 @@ else {
   window.location.href = "/index.html"; 
 } 
 
-// Call checkAuthentication at the beginning of the profile page script
+// Calls checkAuthentication
 checkAuthentication();
-
-
-/*
-import { fetchUserProfile } from "../api/userApi";
-
-// Function to update the profile page with user data
-const updateProfile = (userData) => {
-  // Update the DOM elements with the fetched user data
-  // For instance:
-  document.getElementById('profile_name').textContent = userData.name;
-  document.getElementById('profile_email').textContent = userData.email;
-  // Update other elements as needed
-};
-
-// Fetch user profile when the script runs (at the end of the body tag)
-(async () => {
-  try {
-    const userData = await fetchUserProfile(); // Assuming fetchUserProfile retrieves user data
-    updateProfile(userData);
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    // Handle errors, such as displaying an error message on the page
-  }
-})();
-*/

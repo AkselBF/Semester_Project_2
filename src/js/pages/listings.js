@@ -2,9 +2,9 @@ import { baseUrl } from '../api/constants.js';
 import { save } from '../storage/index.js';
 
 // Function to fetch listings from the API
-const fetchListings = async () => {
+export const fetchListings = async () => {
   try {
-    const response = await fetch(`${baseUrl}listings`);
+    const response = await fetch(`${baseUrl}listings?_active=true`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch listings');
@@ -18,7 +18,7 @@ const fetchListings = async () => {
   }
 };
 
-const displayListings = (listings) => {
+export const displayListings = (listings) => {
   const section = document.querySelector('#listings_section');
   
   // Clear any existing content in the section
@@ -37,8 +37,8 @@ const displayListings = (listings) => {
             <h3 class="listing_search">${listing.title}</h3>
             <p>${listing.endsAt}</p>
           </div>
-          <img src="${listing.media[0]}" alt="${listing.title}" 
-          class="w-300 h-52 rounded-t-lg -mb-10">
+          <img src="${listing.media[0] ? listing.media[0] : ""}" alt="${listing.title}" 
+          class="w-300 h-52 rounded-t-lg -mb-10 object-cover">
         </div>
         <div class="bg-dark_gray px-4 rounded-b-lg pt-2 pb-6">
           <p class="mb-1">Number of bids:</p>

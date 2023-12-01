@@ -1,3 +1,8 @@
+import { loadToken } from "../../storage/index.js";
+import { baseUrl } from "../../api/constants.js";
+//import { headers } from "../../api/headers.js";
+import { displayListings, fetchListings } from '../../pages/listings.js';
+
 // Get necessary elements by their IDs
 const addButton = document.querySelector('#add_listing_btn');
 const addingForm = document.querySelector('#adding_form');
@@ -32,13 +37,51 @@ document.querySelector('#add_form').addEventListener('click', (event) => {
 });
 
 // Handling form submission
-document.querySelector('#add_form').addEventListener('submit', (event) => {
+document.querySelector('#add_form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const addTitle = document.querySelector('#add_title').value;
   const addDescription = document.querySelector('#add_description').value;
   const addImage = document.querySelector('#add_image').value;
   const addDate = document.querySelector('#add_date').value;
+
+  const dateWithoutTime = `${addDate}:00.000Z`;
   
-  //registerUser(registerName, registerEmail, registerPassword, registerAvatar);
+  // Create a new listing object
+  const newListing = {
+    title: addTitle,
+    description: addDescription,
+    media: [addImage],
+    endsAt: dateWithoutTime,
+  };
+
+  console.log(newListing);
+
+  try {
+    const accessToken = loadToken()
+
+    // Send a request to the api to add the new listing
+    const response = await fetch(`${baseUrl}listings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(newListing),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add a new listing');
+    }
+
+    // Close the modal form upon successful submission
+    closeAddingForm();
+
+    // Fetch and display updated listings
+    const updatedListings = await fetchListings();
+    displayListings(updatedListings);
+  } 
+  catch (error) {
+    console.error('Error adding a new listing:', error);
+  }
 });

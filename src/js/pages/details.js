@@ -14,14 +14,14 @@ if (selectedListing) {
   // Title
   const titleElement = document.createElement('h2');
   titleElement.textContent = selectedListing.title;
-  titleElement.className = 'text-3xl my-3 md:my-6 text-left font-semibold'; // Tailwind classes
+  titleElement.className = 'text-3xl my-3 md:my-6 text-left font-semibold';
   document.querySelector('#listing_title').appendChild(titleElement);
 
   // Media
   const mediaElement = document.createElement('img');
   mediaElement.src = selectedListing.media[0];
   mediaElement.alt = selectedListing.title;
-  mediaElement.className = 'mx-auto w-300 max-h-[300px] rounded-t-lg'; // Tailwind classes
+  mediaElement.className = 'mx-auto w-300 max-h-[300px] rounded-t-lg';
   document.querySelector('#listing_bid').appendChild(mediaElement);
 
   // Bids text
@@ -67,3 +67,6 @@ if (selectedListing) {
 
   document.querySelector('#listing_dates').appendChild(datesSection);
 }
+
+console.log('Selected Listing:', selectedListing);
+export { selectedListing };

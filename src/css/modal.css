@@ -1,5 +1,9 @@
-/* CSS for the registration form modal */
-#registration_form, #login_form, #bids_form, #adding_form {
+/* CSS for the form modal */
+#registration_form, 
+#login_form, 
+#bids_form, 
+#adding_form, 
+#update_avatar_form {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,11 +17,19 @@
   transition: 0.5s;
 }
 
-#registration_form, #login_form, #bids_form, #adding_form {
+#registration_form, 
+#login_form, 
+#bids_form, 
+#adding_form, 
+#update_avatar_form {
   display: none;
 }
 
 /* CSS for the form container within the modal */
-#register_form, #log_form, #bid_form, #add_form {
+#register_form, 
+#log_form, 
+#bid_form, 
+#add_form, 
+#update_form {
   background-color: #1e1e1e;
 }
