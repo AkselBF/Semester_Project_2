@@ -1,6 +1,6 @@
-
 import { authenticatedRequest } from './api.js';
-import { saveToken } from '../../storage/index.js';
+//import { saveToken } from '../../storage/index.js';
+import { save } from '../../storage/index.js';
 
 // Function for login request
 export const loginUser = async (email, password) => {
@@ -16,6 +16,23 @@ export const loginUser = async (email, password) => {
   }
 };
 
+
+// Handle login response
+const handleLoginResponse = (response) => {
+  if (response.accessToken) {
+    save('accessToken', response.accessToken);
+    save('name', response.name || '');
+    save('email', response.email || '');
+    save('avatar', response.avatar || '');
+    save('credits', response.credits || '');
+    redirectToProfilePage();
+  } 
+  else {
+    throw new Error('Invalid response format: No accessToken found.');
+  }
+};
+
+/*
 // Handle login response
 const handleLoginResponse = (response) => {
   if (response.accessToken) {
@@ -31,10 +48,10 @@ const handleLoginResponse = (response) => {
 // Save user data to localStorage
 const saveUserData = (userData) => {
   localStorage.setItem('name', userData.name ? userData.name : '');
-  localStorage.setItem('email', userData.email || '');
-  localStorage.setItem('avatar', userData.avatar || '');
-  localStorage.setItem('credits', userData.credits || '');
-};
+  localStorage.setItem('email', userData.email ? userData.email : '');
+  localStorage.setItem('avatar', userData.avatar ? userData.avatar : '');
+  localStorage.setItem('credits', userData.credits ? userData.credits : '');
+};*/
 
 // Redirect to the profile page
 const redirectToProfilePage = () => {

@@ -1,11 +1,14 @@
-import { loadToken } from '../../storage/index.js';
+//import { loadToken } from '../../storage/index.js';
+import { load } from '../../storage/index.js';
 import { baseUrl } from '../constants.js';
 
 // Function to fetch listings for the logged-in user
 async function fetchUserListings() {
   try {
-    const accessToken = loadToken();
-    const username = localStorage.getItem('name');
+    //const accessToken = loadToken();
+    //const username = localStorage.getItem('name');
+    const accessToken = load('accessToken');
+    const username = load('name');
 
     const apiUrl = `${baseUrl}profiles/${username}/listings`;
 
@@ -74,7 +77,7 @@ fetchUserListings()
     renderListings(userListings);
 
     // Handle the fetched listings here
-    console.log('Listings for auctionGuy:', userListings);
+    console.log('User listings:', userListings);
   })
   .catch((error) => {
     // Handle any errors occurred during fetching

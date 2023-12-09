@@ -1,10 +1,13 @@
-import { loadToken } from "../../storage/index.js";
+//import { loadToken } from "../../storage/index.js";
+import { load } from "../../storage/index.js";
 import { baseUrl } from "../constants.js";
 
 export async function updateUserAvatar(avatarURL) {
   try {
-    const token = loadToken();
-    const username = localStorage.getItem('name');
+    //const token = loadToken();
+    //const username = localStorage.getItem('name');
+    const token = load('accessToken');
+    const username = load('name');
 
     const response = await fetch(`${baseUrl}profiles/${username}/media`, {
       method: 'PUT',

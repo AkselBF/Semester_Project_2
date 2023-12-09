@@ -1,7 +1,8 @@
 //import { placeBid } from "../../api/auth/bid.js";
 //import { getSearchParams } from "../../router/searchParams.js";
 import { baseUrl } from "../../api/constants.js";
-import { loadToken } from "../../storage/index.js";
+//import { loadToken } from "../../storage/index.js";
+import { load } from "../../storage/index.js";
 import { selectedListing } from "../../pages/details.js";
 
 // Get necessary elements by their IDs
@@ -49,7 +50,8 @@ bidForm.addEventListener('submit', async (event) => {
 
   try {
     // Make a request to the API to add a bid to the listing
-    const accessToken = loadToken();
+    //const accessToken = loadToken();
+    const accessToken = load('accessToken');
     const response = await fetch(`${baseUrl}listings/${selectedListing.id}/bids`, {
       method: 'POST',
       headers: {

@@ -100,30 +100,50 @@
     <!-- 
       Add listing form
     -->
-    <div id="adding_form" class="bg-trans_black justify-center hidden">
+    <div id="adding_form" class="bg-trans_black justify-center hidden sm:p-5">
       <form id="add_form" 
-      class="bg-dark_gray rounded-lg w-80 h-426 items-center flex flex-col">
+      class="bg-dark_gray rounded-lg w-full md:w-3/4 lg:w-1/2 h-full pb-10 items-center flex flex-col">
         <div id="add_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
           &times;
         </div>
         
         <h2 class="text-2xl font-semibold mb-3">Fill to add listing</h2>
-        <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
+        <div class="bg-white w-1/3 h-0.5 mx-auto mb-6 rounded-full"></div>
 
-        <input id="add_title" type="text" placeholder="Title" name="title" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="justify-center text-center">
+          <input id="add_title" type="text" placeholder="Title" name="title" 
+          class="rounded-md px-3 py-1 my-2 text-black w-3/4">
 
-        <input id="add_description" type="text" placeholder="Description" name="description" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+          <input id="add_description" type="text" placeholder="Description" name="description" 
+          class="rounded-md px-3 py-1 my-2 text-black w-3/4">
 
-        <input id="add_image" type="url" placeholder="Image url" name="image"
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+          <input id="add_date" type="datetime-local" placeholder="End-date & time" name="endsAt" 
+          class="rounded-md px-3 py-1 my-2 text-black w-3/4">
+        </div>
 
-        <input id="add_date" type="datetime-local" placeholder="End-date & time" name="endsAt" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <!--<div class="w-3/4 flex flex-row pt-1 my-2 justify-center mx-auto">
+          <input id="add_image" type="url" placeholder="Image url" name="image"
+          class="w-11/12 md:w-[430px] rounded-l-md px-3 text-black">
+          <button id="add_input_button" class="bg-button_blue text-white text-2xl font-bold
+          text-center align-middle px-2 rounded-r-md">+</button>
+        </div>
         
+        <div id="image_container" 
+        class="w-3/4 flex flex-col pb-1 my-2 gap-y-2 justify-center mx-auto"></div>-->
+
+        <div id="image_container" 
+        class="w-3/4 flex flex-col pb-1 my-2 gap-y-2 justify-center mx-auto">
+          <div class="flex flex-row justify-center text-center">
+            <input id="add_image" type="url" placeholder="Image url" name="image"
+            class="w-11/12 md:w-full rounded-l-md px-3 text-black">
+            <button type="button" id="add_input_button" class="bg-button_blue text-white text-2xl font-bold
+            text-center align-middle px-2 rounded-r-md">+</button>
+          </div>
+        </div>
+        
+        <!-- Submits the form -->
         <button id="submit_add" type="submit" 
-        class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 mt-8">
+        class="rounded-full bg-button_blue text-white font-semibold w-56 px-4 py-2 mt-4">
           Add listing
         </button>
       </form>
