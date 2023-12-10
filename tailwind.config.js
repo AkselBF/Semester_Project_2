@@ -6,6 +6,7 @@ module.exports = {
   "./src/js/ui/*.js",
   "./src/js/ui/forms/*.js",
   ".src/js/ui/components/*.js",
+  ".src/js/ui/components/carousel/*.js",
   "./src/js/pages/*.js"
 ],
   theme: {

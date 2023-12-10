@@ -63,7 +63,7 @@ if (selectedListing) {
   // Title
   const titleElement = document.createElement('h2');
   titleElement.textContent = selectedListing.title;
-  titleElement.className = 'text-3xl mt-3 md:my-3 text-center font-semibold';
+  titleElement.className = 'text-3xl mt-3 md:my-3 text-center font-semibold underline';
   document.querySelector('#listing_title').appendChild(titleElement);
 
   // Media
@@ -71,7 +71,29 @@ if (selectedListing) {
   mediaElement.src = selectedListing.media[0];
   mediaElement.alt = selectedListing.title;
   mediaElement.className = 'mx-auto w-full max-h-[300px] object-cover rounded-t-lg';
-  document.querySelector('#listing_bid').appendChild(mediaElement);
+  document.querySelector('#bid_main').appendChild(mediaElement);
+
+  // All images
+  const remainingImages = selectedListing.media.slice(0);
+
+  // Container for the thumbnail images
+  const carouselContainer = document.querySelector('#bid_carousel');
+
+  // Create and append thumbnail elements
+  remainingImages.forEach(imageUrl => {
+    const thumbnailElement = document.createElement('img');
+    thumbnailElement.src = imageUrl;
+    thumbnailElement.alt = selectedListing.title;
+    thumbnailElement.className = 'mx-2 my-5 cursor-pointer max-h-[60px] object-cover rounded-lg';
+  
+    // Event listener to change the main image when a thumbnail is clicked
+    thumbnailElement.addEventListener('click', () => {
+      mediaElement.src = imageUrl;
+    });
+  
+    // Append thumbnail to the carousel container
+    carouselContainer.appendChild(thumbnailElement);
+  });
 
   // Set the placeholder image URL
   const placeholderImageUrl = '../../images/no_image.png';

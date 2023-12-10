@@ -38,8 +38,19 @@ function createListingElement(listing) {
 
   // Create image element for media
   const imageElement = document.createElement('img');
-  imageElement.src = listing.media[0]; // Assuming media is an array with at least one image URL
+
+  // Assuming media is an array with at least one image URL
+  if (listing.media && listing.media.length > 0) {
+    imageElement.src = listing.media[0];
+  } else {
+    imageElement.src = '../../images/no_image.png';
+  }
+
   imageElement.alt = listing.title;
+  /*
+  imageElement.src = listing.media[0];
+  imageElement.alt = listing.title;
+  */
 
   const titleElement = document.createElement('h3');
   titleElement.textContent = listing.title;
