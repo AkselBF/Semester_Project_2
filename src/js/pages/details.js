@@ -1,13 +1,32 @@
 import { getSearchParams } from '../router/searchParams.js';
-import { load } from '../storage/index.js';
-//import { dateFormat } from '../format/date_format.js';
-//import { fetchListingDetails } from '../api/listingApi.js';
+import { load, save } from '../storage/index.js';
+import { baseUrl } from '../api/constants.js';
+
+
+const params = getSearchParams();
+const listingId = params.id;
 
 // Retrieve listings from localStorage
 const listings = load('listingsData');
 
-const params = getSearchParams();
-const listingId = params.id;
+export const fetchListings = async () => {
+  try {
+    const response = await fetch(`${baseUrl}listings?_active=true&sort=created&_seller=true&_bids=true`);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch listings');
+    }
+
+    const data = await response.json();
+    // Update the localStorage with the fetched data
+    save('listingsData', data); // Assuming you have a save function to store data in localStorage
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching listings:', error);
+    return [];
+  }
+};
 
 // Function to display seller information
 const displaySellerInfo = (seller) => {
@@ -33,35 +52,58 @@ const displaySellerInfo = (seller) => {
 
 // Function to display bidder information
 const displayBidders = (bids) => {
-  /*
-  const biddersElement = document.createElement('div');
-  biddersElement.textContent = 'Winning bidder:';
-  biddersElement.className = 'bidders-info';
-  document.querySelector('#listing_bidders').appendChild(biddersElement);*/
+  const biddersContainer = document.querySelector('#listing_bidders');
+  
+  // Clear existing bid information before updating
+  biddersContainer.innerHTML = '';
 
   if (bids.length > 0) {
     const sortedBids = bids.sort((a, b) => new Date(b.created) - new Date(a.created));
+    
     const latestBid = sortedBids[0];
 
     const bidderElement = document.createElement('div');
     bidderElement.textContent = `Winning bid: ${latestBid.bidderName} - ${latestBid.amount} Credits`;
     bidderElement.className = 'bidder-amount font-semibold';
-    document.querySelector('#listing_bidders').appendChild(bidderElement);
+
+    biddersContainer.appendChild(bidderElement);
   } 
   else {
     const noBidsElement = document.createElement('div');
     noBidsElement.textContent = 'No bids yet.';
     noBidsElement.className = 'no-bids font-semibold';
-    document.querySelector('#listing_bidders').appendChild(noBidsElement);
+
+    biddersContainer.appendChild(noBidsElement);
+  }
+
+  // Update the number of bids
+  const bidsCountElement = document.querySelector('.bids-count');
+
+  if (bidsCountElement) {
+    bidsCountElement.textContent = `Number of bids: ${bids.length}`;
   }
 };
 
 // Find the selected listing by its ID
 const selectedListing = listings.find(listing => listing.id === listingId);
 
+// Subscribe to the bidSubmitted event
+document.addEventListener('bidSubmitted', async () => {
+  // Fetch and update the selected listing details
+  const updatedListings = await fetchListings();
+  save('listingsData', updatedListings);
+
+  // Update the displayed details for the selected listing
+  const updatedListing = updatedListings.find(listing => listing.id === listingId);
+
+  if (updatedListing) {
+    displayBidders(updatedListing.bids); 
+  }
+});
+
 if (selectedListing) {
   // Title
-  const titleElement = document.createElement('h2');
+  const titleElement = document.createElement('h3');
   titleElement.textContent = selectedListing.title;
   titleElement.className = 'text-3xl mt-3 md:my-3 text-center font-semibold underline';
   document.querySelector('#listing_title').appendChild(titleElement);
@@ -70,7 +112,7 @@ if (selectedListing) {
   const mediaElement = document.createElement('img');
   mediaElement.src = selectedListing.media[0];
   mediaElement.alt = selectedListing.title;
-  mediaElement.className = 'mx-auto w-full max-h-[300px] object-cover rounded-t-lg';
+  mediaElement.className = 'mx-auto w-full h-[300px] max-h-[300px] object-cover rounded-t-lg';
   document.querySelector('#bid_main').appendChild(mediaElement);
 
   // All images
@@ -84,7 +126,7 @@ if (selectedListing) {
     const thumbnailElement = document.createElement('img');
     thumbnailElement.src = imageUrl;
     thumbnailElement.alt = selectedListing.title;
-    thumbnailElement.className = 'mx-2 my-5 cursor-pointer max-h-[60px] object-cover rounded-lg';
+    thumbnailElement.className = 'mx-2 my-5 cursor-pointer w-[80px] min-w-[80px] max-w-[80px] h-[60px] min-h-[60px] max-h-[60px] object-cover rounded-lg';
   
     // Event listener to change the main image when a thumbnail is clicked
     thumbnailElement.addEventListener('click', () => {
@@ -108,31 +150,26 @@ if (selectedListing) {
     mediaElement.alt = 'No Image Available';
   }
 
-  /*
-  // Media Carousel
-  const carouselElement = document.createElement('div');
-  carouselElement.textContent = 'Place bid';
-  carouselElement.className = 'bid_button bg-listing_button font-semibold text-white mx-5 mt-4 mb-6 w-56 py-2 rounded-lg';
-  document.querySelector('#listing_bid').appendChild(carouselElement);
-  */
-
-  // Bids text
-  /*
-  const textElement = document.createElement('p');
-  textElement.textContent = 'Number of bids';
-  textElement.className = 'text-left mx-10 mt-5';
-  document.querySelector('#listing_place').appendChild(textElement);*/
 
   // Number of bids
   const bidsElement = document.createElement('p');
   bidsElement.textContent = `Number of bids: ${selectedListing._count.bids}`;
-  bidsElement.className = 'text-left font-semibold';
+  bidsElement.className = 'bids-count text-left font-semibold';
   document.querySelector('#listing_number').appendChild(bidsElement);
 
   // Bids Button
   const bidsButtonElement = document.createElement('button');
   bidsButtonElement.textContent = 'Place bid';
   bidsButtonElement.className = 'bid_button bg-listing_button font-semibold text-white my-10 mb-6 w-56 py-2 rounded-lg';
+
+  // Button cannot be clicked without accessToken
+  const accessToken = load('accessToken');
+  if (!accessToken) {
+    bidsButtonElement.disabled = true;
+    bidsButtonElement.style.opacity = '0.5';
+    bidsButtonElement.style.cursor = 'not-allowed';
+  }
+
   document.querySelector('#listing_add_bid').appendChild(bidsButtonElement);
 
   // Description
@@ -146,7 +183,7 @@ if (selectedListing) {
   datesSection.className = 'md:mt-12 text-left';
 
   // Replace the logic for EndsAt Date with Live Countdown
-  const endsAtDateElement = document.createElement('h3');
+  const endsAtDateElement = document.createElement('h2');
   endsAtDateElement.className = 'endsAtCountdown'; // Add a class for easy identification
 
   // Append to the respective section
@@ -188,21 +225,3 @@ if (selectedListing) {
 
 console.log('Selected Listing:', selectedListing);
 export { selectedListing };
-
-
-/*
-  // Individual Date Elements
-  const createdDateElement = document.createElement('p');
-  createdDateElement.textContent = `Created: ${selectedListing.created}`;
-  datesSection.appendChild(createdDateElement);
-
-  const updatedDateElement = document.createElement('p');
-  updatedDateElement.textContent = `Updated: ${selectedListing.updated}`;
-  datesSection.appendChild(updatedDateElement);
-
-  const endsAtDateElement = document.createElement('p');
-  endsAtDateElement.textContent = `Ends At: ${selectedListing.endsAt}`;
-  datesSection.appendChild(endsAtDateElement);
-
-  document.querySelector('#listing_dates').appendChild(datesSection);
-  */

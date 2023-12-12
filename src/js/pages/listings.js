@@ -47,7 +47,7 @@ export const displayListings = (listings) => {
       <div class="w-300 my-2">
         <div class="flex flex-col-reverse">
           <div class="flex flex-row bg-trans_black py-2 px-4 justify-between">
-            <h3 class="listing_search">${formattedTitle}</h3>
+            <h2 class="listing_search">${formattedTitle}</h2>
             <p class="listing_date">${formattedDate}</p>
           </div>
           <img src="${imageSrc}" 

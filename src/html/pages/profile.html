@@ -76,11 +76,18 @@
       text-center justify-center">
         <div id="avatar_wrapper" class="relative mx-auto mt-0 flex rounded-full">
           <div id="avatar_overlay"></div>
-          <img id="profile_avatar" class="rounded-full mx-auto w-36 h-36 mt-16"></img>
+          <img id="profile_avatar" class="rounded-full mx-auto w-36 h-36 mt-16" alt="avatar image"></img>
           <span id="avatar_tooltip" class="tooltip w-8 py-1 px-2 text-white hidden z-[5]">
             <i class="fa-regular fa-pen-to-square fa-xl"></i>
           </span>
         </div>
+      </div>
+
+      <div class="mt-16 text-black items-center justify-center mx-auto mb-6 w-64">
+        <h1 id="profile_name" class="text-center text-2xl font-semibold my-4"></h1>
+        <div id="profile_avatar" class="w-64 h-0.5 mx-auto my-4 bg-black rounded-full" src=""></div>
+        <p id="profile_email" class="my-2 text-center"></p>
+        <p id="profile_credits" class="my-2 text-center"></p>
       </div>
 
       <!-- Form to update avatar -->
@@ -105,19 +112,12 @@
           </button>
         </form>
       </div>
-
-      <div class="mt-16 text-black items-center justify-center mx-auto mb-6 w-64">
-        <h3 id="profile_name" class="text-center text-2xl font-semibold my-4"></h3>
-        <div id="profile_avatar" class="w-64 h-0.5 mx-auto my-4 bg-black rounded-full" src=""></div>
-        <p id="profile_email" class="my-2 text-center"></p>
-        <p id="profile_credits" class="my-2 text-center"></p>
-      </div>
     </section>
 
     <section class="bg-black text-white pt-4 pb-12">
-      <h3 class="text-center text-xl font-semibold mt-4 mb-8 underline">
+      <h2 class="text-center text-xl font-semibold mt-4 mb-8 underline">
         User listings:
-      </h3>
+      </h2>
 
       <div id="winning_listings" 
       class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center"></div>
