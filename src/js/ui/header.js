@@ -9,6 +9,8 @@ const initMenu = () => {
   const loginBLink = document.querySelector('#b_login');
   const logoutLink = document.querySelector('#logout');
   const logoutBLink = document.querySelector('#b_logout');
+  const profileLink = document.querySelector('#profile');
+  const profileBLink = document.querySelector('#b_profile');
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle('hidden');
@@ -28,12 +30,16 @@ const initMenu = () => {
     logoutBLink.style.display = 'block';
     loginLink.style.display = 'none';
     loginBLink.style.display = 'none';
+    profileLink.style.display = 'block';
+    profileBLink.style.display = 'block';
   } else {
     // User is logged out, show login and hide logout
     logoutLink.style.display = 'none';
     logoutBLink.style.display = 'none';
     loginLink.style.display = 'block';
     loginBLink.style.display = 'block';
+    profileLink.style.display = 'none';
+    profileBLink.style.display = 'none';
   }
 }
 

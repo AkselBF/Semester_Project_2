@@ -17,7 +17,7 @@ if (token && name && email && avatar) {
   document.querySelector("#profile_credits").textContent = `Credits: ${credits}`;
 } 
 else {
-  window.location.href = "/index.html"; 
+  window.location.href = "../../index.html"; 
 } 
 
 // Calls checkAuthentication

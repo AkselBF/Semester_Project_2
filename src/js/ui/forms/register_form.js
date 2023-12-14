@@ -139,7 +139,7 @@ registerEmailInput.addEventListener('input', () => {
 registerPasswordInput.addEventListener('input', () => {
   // For password input
   const password = registerPasswordInput.value.trim();
-  const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
   if (password === '') {
     passwordError.textContent = '';
