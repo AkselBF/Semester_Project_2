@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tailwind": "npx tailwindcss -i ./src/css/styles.css -o ./dist/output.css --watch",
+    "build": "npx tailwindcss -i ./src/css/styles.css -o ./dist/output.css",
     "format": "prettier -w src/**/*.js",
     "lint": "eslint src/**/*.js",
     "lint-fix": "eslint src/**/*.js --cache --fix",
