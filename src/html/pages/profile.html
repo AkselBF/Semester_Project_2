@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="profile_page" content="Users can see their user data and what items they've purchased">
+  <title>Profile page</title>
+
+  <script src="https://kit.fontawesome.com/26fd6b155e.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../../../dist/output.css">
+  <link rel="stylesheet" href="../../css/avatar_update.css">
+  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/profile_listings.css">
+
+  <script type="module" src="../../js/ui/header.js"></script>
+  <script type="module" src="../../js/api/auth/logout.js"></script>
+  <script type="module" src="../../js/api/auth/profile_listings.js"></script>
+
+  <script type="module" src="../../js/pages/profile.js"></script>
+  <script type="module" src="../../js/ui/forms/update_form.js"></script>
+</head>
+<body class="text-white relative">
+  <header class="bg-darker_gray sticky z-10">
+    <section class="max-w-full p-4 flex justify-between items-center">
+      <!--<h1 class="text-3xl mx-4 font-medium">DNA</h1>-->
+      <a href="./home.html">
+        <img src="../../images/DNA_logo.png" class="mx-4">
+      </a>
+
+      <button id="hamburger-button" class="text-3xl mx-4 md:hidden cursor-pointer relative w-8 h-8">
+        <div class="bg-white w-8 h-1 rounded 
+        absolute top-4 -mt-0.5 transition-all 
+        duration-500 before:content-[''] 
+        before:bg-white before:w-8 before:h-1 
+        before:rounded before:absolute 
+        before:-translate-x-4 
+        before:-translate-y-3 
+        before:transition-all 
+        before:duration-500 
+        after:content-[''] after:bg-white 
+        after:w-8 after:h-1 after:rounded 
+        after:absolute 
+        after:-translate-x-4 
+        after:translate-y-3 
+        after:transition-all 
+        after:duration-500">
+        </div>
+      </button>
+  
+      <nav class="hidden md:flex space-x-8 text-lg flex-grow" aria-label="main">
+        <div class="flex justify-center flex-grow">
+          <a href="./home.html" class="hover:opacity-90 mx-4">Home</a>
+          <a href="#" class="hover:opacity-90 mx-4">Profile</a>
+          <a href="./listings.html" class="hover:opacity-90 mx-4">Listings</a>
+        </div>
+        <div class="flex">
+          <a href="../../../index.html" id="login" class="hover:opacity-90 mx-4">Login</a>
+          <a href="#" id="logout" class="hover:opacity-90 mx-4">Logout</a>
+        </div>
+      </nav>
+    </section>
+
+    <section id="mobile-menu" 
+    class="absolute top-68 bg-trans_black w-full text-2xl flex-col justify-center origin-top animate-open-menu hidden">
+      <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
+        <a href="./home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
+        <a href="#" class="w-full text-center py-6 hover:opacity-90">Profile</a>
+        <a href="./listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="../../../index.html" id="b_login" class="w-full text-center py-6 hover:opacity-90">Login</a>
+        <a href="#" id="b_logout" class="w-full text-center py-6 hover:opacity-90">Logout</a>
+      </nav>
+    </section>
+  </header>
+
+  <main>
+    <section class="mt-0 mb-12 justify-center text-left text-black">
+      <div class="max-w-full mx-auto bg-blue h-44 w-full top-0 left-0 mt--8 
+      text-center justify-center">
+        <div id="avatar_wrapper" class="relative mx-auto mt-0 flex rounded-full">
+          <div id="avatar_overlay"></div>
+          <img id="profile_avatar" class="rounded-full mx-auto w-36 h-36 mt-16" alt="avatar image"></img>
+          <span id="avatar_tooltip" class="tooltip w-8 py-1 px-2 text-white hidden z-[5]">
+            <i class="fa-regular fa-pen-to-square fa-xl"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-16 text-black items-center justify-center mx-auto mb-6 w-64">
+        <h1 id="profile_name" class="text-center text-2xl font-semibold my-4"></h1>
+        <div id="profile_avatar" class="w-64 h-0.5 mx-auto my-4 bg-black rounded-full" src=""></div>
+        <p id="profile_email" class="my-2 text-center"></p>
+        <p id="profile_credits" class="my-2 text-center"></p>
+      </div>
+
+      <!-- Form to update avatar -->
+      <div id="update_avatar_form" class="bg-trans_black justify-center hidden">
+        <form id="update_form" 
+        class="bg-dark_gray text-white rounded-lg w-[300px] h-[300px] items-center flex flex-col">
+          <div id="update_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
+            &times;
+          </div>
+          
+          <!-- Form description -->
+          <h2 class="text-2xl font-semibold mb-3">Image url (address)</h2>
+          <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
+  
+          <!-- Bids form field -->
+          <input id="update_img" type="url" placeholder="Image url" name="update" 
+          class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+          
+          <button id="submit_update" type="submit" 
+          class="rounded-full bg-listing_button text-white font-semibold w-2/3 px-4 py-2 mt-8">
+            Update avatar
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="bg-black text-white pt-4 pb-12">
+      <h2 class="text-center text-xl font-semibold mt-4 mb-8 underline">
+        User listings:
+      </h2>
+
+      <div id="winning_listings" 
+      class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center"></div>
+    </section>
+  </main>
+</body>
+</html>

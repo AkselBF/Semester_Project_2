@@ -2,11 +2,30 @@
 module.exports = {
   content: [
   "./index.html", 
-  "./src/html/*.html", 
-  "./src/js/ui/*.js"
+  "./src/html/pages/*.html", 
+  "./src/js/ui/*.js",
+  "./src/js/ui/forms/*.js",
+  ".src/js/ui/components/*.js",
+  ".src/js/ui/components/carousel/*.js",
+  "./src/js/pages/*.js"
 ],
   theme: {
     extend: {
+      width: {
+        '280': '280px',
+        '300': '300px',
+        '808': '808px',
+        '80%': '80%',
+        '90%': '90%',
+      },
+      height: {
+        '262': '262px',
+        '300': '300px',
+        '356': '356px',
+        '426': '426px',
+        '460': '460px',
+        '500': '500px',
+      },
       screens: {
         'tablet': '640px',
         'laptop': '1024px',
@@ -31,10 +50,19 @@ module.exports = {
       'trans_black': '#000000cc',
       'dark_gray': '#1E1E1E',
       'darker_gray': '#171717',
+      'blue': '#3A4DF2',
       'button_blue': '#1D48E2',
+      'home_blue_one': '#0094FF',
+      'home_blue_two': '#23E5FF',
       'login_blue': '#3A7DFFD1',
       'login_second': '#002978B3',
       'login_full': '#002978e6',
+      'listing_gradient': '#070B48',
+      'listing_title_one': '#000AFF',
+      'listing_title_two': '#000587',
+      'listing_button': '#2965FF',
+      'details_bg': '#0F113E',
+      'details_dark_bg': '#040517',
       'gold': '#E7C200'
     },
   },

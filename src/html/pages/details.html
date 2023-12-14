@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="details_page" content="Page where the product details are written">
+  <title>Details page</title>
+
+  <link rel="stylesheet" href="../../../dist/output.css">
+  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/carousel_scroll.css">
+
+  <script type="module" src="../../js/ui/header.js"></script>
+  <script type="module" src="../../js/api/auth/logout.js"></script>
+
+  <script type="module" src="../../js/pages/details.js"></script>
+  <script type="module" src="../../js/ui/forms/bid_form.js"></script>
+</head>
+<body class="bg-gradient-to-tl from-details_dark_bg via-details_bg to-details_dark_bg
+text-white h-full relative bg-no-repeat bg-cover min-h-screen">
+  <header class="bg-darker_gray sticky text-white">
+    <section class="max-w-full p-4 flex justify-between items-center">
+      <!--<h1 class="text-3xl mx-4 font-medium">DNA</h1>-->
+      <a href="./home.html">
+        <img src="../../images/DNA_logo.png" class="mx-4">
+      </a>
+
+      <button id="hamburger-button" class="text-3xl mx-4 md:hidden cursor-pointer relative w-8 h-8">
+        <div class="bg-white w-8 h-1 rounded 
+        absolute top-4 -mt-0.5 transition-all 
+        duration-500 before:content-[''] 
+        before:bg-white before:w-8 before:h-1 
+        before:rounded before:absolute 
+        before:-translate-x-4 
+        before:-translate-y-3 
+        before:transition-all 
+        before:duration-500 
+        after:content-[''] after:bg-white 
+        after:w-8 after:h-1 after:rounded 
+        after:absolute 
+        after:-translate-x-4 
+        after:translate-y-3 
+        after:transition-all 
+        after:duration-500">
+        </div>
+      </button>
+  
+      <nav class="hidden md:flex space-x-8 text-lg flex-grow" aria-label="main">
+        <div class="flex justify-center flex-grow">
+          <a href="./home.html" class="hover:opacity-90 mx-4">Home</a>
+          <a href="./profile.html" class="hover:opacity-90 mx-4">Profile</a>
+          <a href="./listings.html" class="hover:opacity-90 mx-4">Listings</a>
+        </div>
+        <div class="flex">
+          <a href="../../../index.html" id="login" class="hover:opacity-90 mx-4">Login</a>
+          <a href="#" id="logout" class="hover:opacity-90 mx-4">Logout</a>
+        </div>
+      </nav>
+    </section>
+
+    <section id="mobile-menu" 
+    class="absolute top-68 bg-trans_black w-full text-2xl flex-col justify-center origin-top animate-open-menu hidden">
+      <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
+        <a href="./home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
+        <a href="./profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
+        <a href="./listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
+        <a href="../../../index.html" id="b_login" class="w-full text-center py-6 hover:opacity-90">Login</a>
+        <a href="#" id="b_logout" class="w-full text-center py-6 hover:opacity-90">Logout</a>
+      </nav>
+    </section>
+  </header>
+
+  <main class="h-full md:p-5">
+    <h1 class="text-3xl text-center font-semibold underline mb-5">Listing bid</h1>
+
+    <!--
+      Listing info (seller and bidder included)
+    -->
+    <div id="listing_details" class="flex flex-col lg:flex-row 
+    justify-center items-center md:items-start md:px-10">
+      <div id="listing_place" 
+      class="w-[300px] sm:w-5/6 md:w-3/4 lg:w-1/2 flex flex-col mx-auto lg:mr-5 
+      bg-dark_gray my-1 sm:my-6 rounded-lg px-6 sm:px-10 py-6 justify-center">
+        <div id="listing_dates" class="left_side text-center mt-3 mb-5 text-home_blue_two"></div>
+
+        <div class="h-0.5 w-3/4 ml-auto rounded-l-full bg-home_blue_two mb-5"></div>
+
+        <div id="listing_seller" class="left_side flex flex-col md:flex-row align-middle">
+          <div id="seller-avatar"></div>
+          <div id="seller-info" class="mx-6 text-left"></div>
+        </div>
+
+        <div class="h-0.5 rounded-full bg-home_blue_one mt-5"></div>
+
+        <div id="listing_title" class="left_side"></div>
+        <div id="listing_desc" class="left_side"></div>
+
+        <div class="h-0.5 w-2/3 rounded-r-full bg-home_blue_one mb-5"></div>
+
+        <div id="bidders" class="flex flex-col md:flex-row justify-between">
+          <div id="listing_bidders" class="left_side"></div>
+          <div id="listing_number" class=""></div>
+        </div>
+        <div id="listing_add_bid" class="mx-auto"></div>
+      </div>
+
+      <div id="listing_bid" class="w-[300px] sm:w-5/6 md:w-3/4 lg:w-1/3 lg:ml-5 
+      right_side mx-auto pb-5 mt-1 mb-6 sm:my-6 bg-dark_gray 
+      rounded-lg justify-center text-center">
+        <div id="bid_main"></div>
+        <div id="bid_carousel" 
+        class="flex flex-row mx-auto py-2 max-w-[300px] whitespace-nowrap overflow-x-auto"></div>
+      </div>
+    </div>
+
+    <!-- 
+      Bids form
+    -->
+    <div id="bids_form" class="bg-trans_black justify-center hidden">
+      <form id="bid_form" 
+      class="bg-dark_gray rounded-lg w-[300px] h-[300px] items-center flex flex-col">
+        <div id="bid_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
+          &times;
+        </div>
+        
+        <!-- Form description -->
+        <h2 class="text-2xl font-semibold mb-3">Type in your bid</h2>
+        <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
+
+        <!-- Bids form field -->
+        <input id="bid_amount" type="number" placeholder="Bid amount" name="bid" 
+        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        
+        <button id="submit_bid" type="submit" 
+        class="rounded-full bg-listing_button text-white font-semibold w-2/3 px-4 py-2 mt-8">
+          Confirm bid
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

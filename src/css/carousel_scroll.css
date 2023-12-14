@@ -1,0 +1,28 @@
+/* Hide scrollbar track */
+#bid_carousel {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Width of the scrollbar */
+#bid_carousel::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+
+/* Scrollbar thumb */
+#bid_carousel::-webkit-scrollbar-thumb {
+  background-color: #1a1a1aaa;
+  border-radius: 8px;
+}
+
+#bid_carousel::-webkit-scrollbar-thumb:hover {
+  background-color: #1a1a1ac5;
+  transition: 0.5s;
+}
+
+/* Color of the track */
+#bid_carousel::-webkit-scrollbar-track {
+  background-color: #ffffff77;
+  border-radius: 50px;
+}
