@@ -9,21 +9,55 @@ const addButton = document.querySelector('#add_listing_btn');
 const addingForm = document.querySelector('#adding_form');
 const closeAdd = document.querySelector('#add_close');
 
+const addTitleInput = document.querySelector('#add_title');
+const addDescriptionInput = document.querySelector('#add_description');
+const addDateInput = document.querySelector('#add_date');
+
+const addSubmit = document.querySelector('#submit_add');
+
+
 // Function to open the add form modal
 function openAddingForm() {
   addingForm.style.display = 'flex';
+
+  addSubmit.disabled = true;
+  addSubmit.style.opacity = '0.5';
 }
 
 // Function to close the add form modal
 function closeAddingForm() {
   addingForm.style.display = 'none';
 
+  addSubmit.disabled = true;
+  addSubmit.style.opacity = '0.5';
+
+  //addTitleInput.style.border = '';
+  //addDescriptionInput.style.border = '';
+  //addDateInput.style.border = '';
+
   document.querySelector('#add_form').reset();
+}
+
+// If the user is logged in
+function isLoggedIn() {
+  const token = load('accessToken')
+  return token !== null && token !== undefined && token !== '';
+}
+
+function toggleAddButtonVisibility() {
+  if (isLoggedIn()) {
+    addButton.style.display = 'block';
+  } else {
+    addButton.style.display = 'none';
+  }
 }
 
 // Event listeners to trigger opening and closing of the modal
 addButton.addEventListener('click', openAddingForm);
 closeAdd.addEventListener('click', closeAddingForm);
+
+toggleAddButtonVisibility();
+
 
 // Close modal if user clicks outside the form
 addingForm.addEventListener('click', (event) => {
@@ -83,10 +117,10 @@ addInputButton.addEventListener('click', addImageInput);
 document.querySelector('#add_form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const addTitle = document.querySelector('#add_title').value;
-  const addDescription = document.querySelector('#add_description').value;
+  const addTitle = addTitleInput.value;
+  const addDescription = addDescriptionInput.value;
   //const addImage = document.querySelector('#add_image').value;
-  const addDate = document.querySelector('#add_date').value;
+  const addDate = addDateInput.value;
 
   const dateWithoutTime = `${addDate}`;
 
@@ -146,3 +180,59 @@ document.querySelector('#add_form').addEventListener('submit', async (event) => 
     console.error('Error adding a new listing:', error);
   }
 });
+
+/*
+  Extra
+*/
+addTitleInput.addEventListener('input', () => {
+  /*
+  const listingTitle = addTitleInput.value.trim();
+
+  if (listingTitle.length < 1) {
+    addTitleInput.style.border = '';
+  } else {
+    addTitleInput.style.border = '2px solid #0eff00';
+  }*/
+
+  validateListing();
+})
+
+addDescriptionInput.addEventListener('input', () => {
+  /*
+  const listingDesc = addDescriptionInput.value.trim();
+
+  if (listingDesc.length < 1) {
+    addDescriptionInput.style.border = '';
+  } else {
+    addDescriptionInput.style.border = '2px solid #0eff00';
+  }*/
+
+  validateListing();
+})
+
+addDateInput.addEventListener('input', () => {
+  /*
+  const listingDate = addDateInput.value.trim();
+
+  if (listingDate.length < 1) {
+    addDateInput.style.border = '';
+  } else {
+    addDateInput.style.border = '2px solid #0eff00';
+  }*/
+
+  validateListing();
+})
+
+function validateListing() {
+  const titleValid = addTitleInput.value.trim().length >= 1;
+  const descValid = addDescriptionInput.value.trim().length >= 1;
+  const dateValid = addDateInput.value.trim().length >= 1;
+
+  if (titleValid && descValid && dateValid) {
+    addSubmit.disabled = false;
+    addSubmit.style.opacity = '1';
+  } else {
+    addSubmit.disabled = true;
+    addSubmit.style.opacity = '0.5';
+  }
+}

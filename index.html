@@ -20,7 +20,10 @@
 <body class="bg-gradient-to-bl from-login_full to-black text-white relative">
   <header class="bg-darker_gray sticky">
     <section class="max-w-full p-4 flex justify-between items-center">
-      <h1 class="text-3xl mx-4 font-medium">DNA</h1>
+      <!--<h1 class="text-3xl mx-4 font-medium">DNA</h1>-->
+      <a href="./src/html/pages/home.html">
+        <img src="./src/images/DNA_logo.png" class="mx-4">
+      </a>
 
       <button id="hamburger-button" class="text-3xl mx-4 md:hidden cursor-pointer relative w-8 h-8">
         <div class="bg-white w-8 h-1 rounded 
@@ -49,7 +52,7 @@
           <a href="./src/html/pages/listings.html" class="hover:opacity-90 mx-4">Listings</a>
         </div>
         <div class="flex">
-          <a href="#" class="hover:opacity-90 mx-4">Login</a>
+          <a href="#" id="login" class="hover:opacity-90 mx-4">Login</a>
           <a href="#" id="logout" class="hover:opacity-90 mx-4">Logout</a>
         </div>
       </nav>
@@ -61,8 +64,8 @@
         <a href="#" class="w-full text-center py-6 hover:opacity-90">Home</a>
         <a href="./src/html/pages/profile.html" class="w-full text-center py-6 hover:opacity-90">Profile</a>
         <a href="./src/html/pages/listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
-        <a href="./src/html/pages/login.html" class="w-full text-center py-6 hover:opacity-90">Login</a>
-        <a href="#" class="w-full text-center py-6 hover:opacity-90">Logout</a>
+        <a href="./src/html/pages/login.html" id="b_login" class="w-full text-center py-6 hover:opacity-90">Login</a>
+        <a href="#" id="b_logout" class="w-full text-center py-6 hover:opacity-90">Logout</a>
       </nav>
     </section>
   </header>
@@ -98,7 +101,7 @@
     -->
     <div id="login_form" class="bg-trans_black justify-center hidden">
       <form id="log_form" 
-      class="bg-dark_gray rounded-lg w-80 h-426 items-center flex flex-col">
+      class="bg-dark_gray rounded-lg w-80 h-426 items-center flex flex-col relative">
         <div id="login_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
           &times;
         </div>
@@ -108,14 +111,22 @@
         <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
 
         <!-- Login form fields (Email, Password) -->
-        <input id="login_email" type="email" placeholder="E-mail" name="email" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">E-mail</label>
+          <input id="login_email" type="email" placeholder="E-mail" name="email" 
+          class="rounded-md px-3 py-1 text-black">
+          <div id="login_email_error" class="text-[14px] text-[#ff0000] text-right"></div>
+        </div>
 
-        <input id="login_password" type="password" placeholder="Password" name="password" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">Password</label>
+          <input id="login_password" type="password" placeholder="Password" name="password" 
+          class="rounded-md px-3 py-1 text-black">
+          <div id="login_password_error" class="text-[14px] text-[#ff0000] text-right"></div>
+        </div>
         
         <button id="submit_login" type="submit" 
-        class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 mt-32">
+        class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 absolute bottom-10">
           Login
         </button>
       </form>
@@ -126,7 +137,7 @@
     -->
     <div id="registration_form" class="bg-trans_black justify-center hidden">
       <form id="register_form" 
-      class="bg-dark_gray rounded-lg w-80 h-426 items-center flex flex-col">
+      class="bg-dark_gray rounded-lg w-80 h-[600px] items-center flex flex-col relative">
         <div id="register_close" class="text-3xl text-right w-11/12 rounded-full cursor-pointer my-1">
           &times;
         </div>
@@ -136,20 +147,36 @@
         <div class="bg-white w-1/2 h-0.5 mx-auto mb-6 rounded-full"></div>
 
         <!-- Registration form fields (Name, Email, Password, Avatar) -->
-        <input id="register_name" type="text" placeholder="Name" name="name" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">Name</label>
+          <input id="register_name" type="text" placeholder="Name..." name="name" 
+          class="rounded-md px-3 py-1 text-black">
+          <!--<div id="name_error" class="text-[14px] text-[#ff0000] text-right"></div>-->
+        </div>
 
-        <input id="register_email" type="email" placeholder="E-mail" name="email" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">E-mail</label>
+          <input id="register_email" type="email" placeholder="E-mail..." name="email" 
+          class="rounded-md px-3 py-1 text-black">
+          <div id="email_error" class="text-[14px] text-[#ff0000] text-right"></div>
+        </div>
 
-        <input id="register_password" type="password" placeholder="Password" name="password" 
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">Password</label>
+          <input id="register_password" type="password" placeholder="Min 6 char, 1 num, 1 upper" name="password" 
+          class="rounded-md px-3 py-1 text-black">
+          <div id="password_error" class="text-[14px] text-[#ff0000] text-right"></div>
+        </div>
 
-        <input id="register_avatar" type="url" placeholder="Avatar" name="avatar"
-        class="rounded-md px-3 py-1 my-2 w-3/4 text-black">
+        <div class="my-2 text-left w-3/4 flex flex-col">
+          <label class="font-semibold">Avatar</label>
+          <input id="register_avatar" type="url" placeholder="Avatar url..." name="avatar"
+          class="rounded-md px-3 py-1 text-black">
+          <div id="avatar_error" class="text-[14px] text-[#ff0000] text-right"></div>
+        </div>
         
         <button id="submit_registration" type="submit" 
-        class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 mt-8">
+        class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 absolute bottom-10">
           Register
         </button>
       </form>

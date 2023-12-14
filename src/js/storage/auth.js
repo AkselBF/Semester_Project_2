@@ -1,8 +1,8 @@
-import { loadToken } from "./index.js";
+import { load } from "./index.js";
 
 // Function to check if the user is authenticated
 export function isAuthenticated() {
-  const token = loadToken();
+  const token = load('accessToken');
   return !!token;
 }
 

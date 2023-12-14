@@ -1,14 +1,5 @@
 import { checkAuthentication } from '../storage/auth.js';
 import { load } from '../storage/index.js';
-/*
-const name = localStorage.getItem("name");
-const email = localStorage.getItem("email");
-const avatar = localStorage.getItem("avatar");
-const credits = localStorage.getItem("credits");
-
-// Check if user is logged in
-const token = localStorage.getItem("accessToken");
-*/
 
 const name = load("name");
 const email = load("email");

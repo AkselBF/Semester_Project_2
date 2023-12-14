@@ -16,13 +16,14 @@ export const authenticatedRequest = async (endpoint, method = 'GET', data = null
 
   try {
     const response = await fetch(`${baseUrl}${endpoint}`, requestOptions);
+    
     if (!response.ok) {
       throw new Error('Network response was not ok.');
     }
     return await response.json();
   } 
   catch (error) {
-    console.error('Error:', error);
+    //console.error('Error:', error);
     throw new Error('Failed to fetch data.');
   }
 };
