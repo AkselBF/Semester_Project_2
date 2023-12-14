@@ -76,62 +76,20 @@ document.querySelector('#log_form').addEventListener('submit', (event) => {
 
 
 /*
-  Extra
+  For better form validation
 */
 loginEmailInput.addEventListener('input', () => {
-  // For email input
-  const email = loginEmailInput.value.trim();
-  const emailPattern = /^(?=.*[@])(?=.*\.(?=.{2,}))(?=.*\b(?:noroff\.no|stud\.noroff\.no)$).+/i;
-
-  if (email === '') {
-    loginEmailError.textContent = '';
-    loginEmailInput.style.border = '';
-    return;
-  }
-
-  if (!emailPattern.test(email)) {
-    loginEmailInput.style.border = '2px solid red';
-    loginEmailError.textContent = 'Invalid email format';
-    loginEmailError.style.display = 'block';
-  } 
-  else {
-    loginEmailInput.style.border = '2px solid #0eff00';
-    loginEmailError.textContent = '';
-    loginEmailError.style.display = 'none';
-  }
-
   validateForm();
 })
 
 loginPasswordInput.addEventListener('input', () => {
-  // For password input
-  const password = loginPasswordInput.value.trim();
-  const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
-
-  if (password === '') {
-    loginPasswordError.textContent = '';
-    loginPasswordInput.style.border = '';
-    return;
-  }
-
-  if (!passwordPattern.test(password)) {
-    loginPasswordInput.style.border = '2px solid red';
-    loginPasswordError.textContent = 'Invalid password';
-    loginPasswordError.style.display = 'block';
-  } 
-  else {
-    loginPasswordInput.style.border = '2px solid #0eff00';
-    loginPasswordError.textContent = '';
-    loginPasswordError.style.display = 'none';
-  }
-
   validateForm();
 })
 
 // Function to validate the entire form and enable/disable submit button
 function validateForm() {
   const emailValid = /^[a-zA-Z0-9._-]+@(noroff\.no|stud\.noroff\.no)$/.test(loginEmailInput.value.trim());
-  const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/.test(loginPasswordInput.value.trim());
+  const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(loginPasswordInput.value.trim());
 
   // Enable submit button only if all inputs are valid
   if (emailValid && passwordValid) {
