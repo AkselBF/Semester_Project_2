@@ -4,9 +4,8 @@ import { load } from '../../storage/index.js';
 
 // Function to make authenticated API requests
 export const authenticatedRequest = async (endpoint, method = 'GET', data = null) => {
-  const token = load();
-
-  console.log(data);
+  const token = load('accessToken');
+  //console.log(data);
 
   const requestOptions = {
     method,

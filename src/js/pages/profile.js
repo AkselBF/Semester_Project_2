@@ -17,7 +17,11 @@ if (token && name && email && avatar) {
   document.querySelector("#profile_credits").textContent = `Credits: ${credits}`;
 } 
 else {
-  window.location.href = "../../index.html"; 
+  //window.location.href = "../../index.html"; 
+  const isGitHubPages = window.location.hostname.includes('github.io');
+  const repositoryName = isGitHubPages ? window.location.pathname.split('/')[1] : '';
+  const loginPagePath = `${repositoryName}/index.html`;
+  window.location.href = `${window.location.origin}/${loginPagePath}`;
 } 
 
 // Calls checkAuthentication

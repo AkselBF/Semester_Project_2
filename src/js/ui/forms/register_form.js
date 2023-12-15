@@ -189,7 +189,8 @@ registerAvatarInput.addEventListener('input', () => {
 function validateForm() {
   const nameValid = registerNameInput.value.trim().length >= 1;
   const emailValid = /^[a-zA-Z0-9._-]+@(noroff\.no|stud\.noroff\.no)$/.test(registerEmailInput.value.trim());
-  const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/.test(registerPasswordInput.value.trim());
+  const passwordValid = registerPasswordInput.value.trim().length >= 8;
+  //const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/.test(registerPasswordInput.value.trim());
 
   const avatarUrl = registerAvatarInput.value.trim();
   const avatarRegex = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;

@@ -61,7 +61,7 @@
     <section id="mobile-menu" 
     class="absolute top-68 bg-trans_black w-full text-2xl flex-col justify-center origin-top animate-open-menu hidden">
       <nav class="flex flex-col min-h-screen items-center py-8" aria-label="mobile">
-        <a href="#" class="w-full text-center py-6 hover:opacity-90">Home</a>
+        <a href="./src/html/pages/home.html" class="w-full text-center py-6 hover:opacity-90">Home</a>
         <a href="./src/html/pages/profile.html" id="b_profile" class="w-full text-center py-6 hover:opacity-90">Profile</a>
         <a href="./src/html/pages/listings.html" class="w-full text-center py-6 hover:opacity-90">Listings</a>
         <a href="./src/html/pages/login.html" id="b_login" class="w-full text-center py-6 hover:opacity-90">Login</a>
@@ -124,6 +124,8 @@
           class="rounded-md px-3 py-1 text-black">
           <div id="login_password_error" class="text-[14px] text-[#ff0000] text-right"></div>
         </div>
+
+        <div id="error_message" class="text-[14px] text-[#ff0000] text-center w-3/4"></div>
         
         <button id="submit_login" type="submit" 
         class="rounded-full bg-button_blue text-white font-semibold w-2/3 px-4 py-2 absolute bottom-10">
