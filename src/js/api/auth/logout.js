@@ -19,7 +19,12 @@ if (logoutButton) {
     logout();
 
     // Redirect the user to the login page after logout
-    window.location.href = '/index.html';
+    //window.location.href = '/index.html';
+
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repositoryName = isGitHubPages ? window.location.pathname.split('/')[1] : '';
+    const loginPagePath = `${repositoryName}/index.html`;
+    window.location.href = `${window.location.origin}/${loginPagePath}`;
   });
 }
 
@@ -29,7 +34,12 @@ if (logoutBButton) {
     logout();
 
     // Redirect the user to the login page after logout
-    window.location.href = '/index.html';
+    //window.location.href = '/index.html';
+
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repositoryName = isGitHubPages ? window.location.pathname.split('/')[1] : '';
+    const loginPagePath = `${repositoryName}/index.html`;
+    window.location.href = `${window.location.origin}/${loginPagePath}`;
   });
 }
 

@@ -89,7 +89,8 @@ loginPasswordInput.addEventListener('input', () => {
 // Function to validate the entire form and enable/disable submit button
 function validateForm() {
   const emailValid = /^[a-zA-Z0-9._-]+@(noroff\.no|stud\.noroff\.no)$/.test(loginEmailInput.value.trim());
-  const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(loginPasswordInput.value.trim());
+  const passwordValid = loginPasswordInput.value.trim().length >= 8;
+  //const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(loginPasswordInput.value.trim());
 
   // Enable submit button only if all inputs are valid
   if (emailValid && passwordValid) {

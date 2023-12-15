@@ -1,6 +1,8 @@
 import { authenticatedRequest } from './api.js';
-//import { saveToken } from '../../storage/index.js';
 import { save } from '../../storage/index.js';
+
+
+//const errorMessagesContainer = document.querySelector('#error_message');
 
 // Function for login request
 export const loginUser = async (email, password) => {
@@ -12,10 +14,19 @@ export const loginUser = async (email, password) => {
   } 
   catch (error) {
     console.error(error);
-    throw error;
+    //throw error;
+    /*
+    if (error.response && error.response.status === 401) {
+      displayLoginError('Invalid email or password');
+    }*/
   }
 };
-
+/*
+// Function to display login error message
+const displayLoginError = (message) => {
+  errorMessagesContainer.textContent = message;
+};
+*/
 
 // Handle login response
 const handleLoginResponse = (response) => {
@@ -31,29 +42,16 @@ const handleLoginResponse = (response) => {
     throw new Error('Invalid response format: No accessToken found.');
   }
 };
-
 /*
-// Handle login response
-const handleLoginResponse = (response) => {
-  if (response.accessToken) {
-    saveToken(response.accessToken);
-    saveUserData(response);
-    redirectToProfilePage();
-  } 
-  else {
-    throw new Error('Invalid response format: No accessToken found.');
-  }
-};
-
-// Save user data to localStorage
-const saveUserData = (userData) => {
-  localStorage.setItem('name', userData.name ? userData.name : '');
-  localStorage.setItem('email', userData.email ? userData.email : '');
-  localStorage.setItem('avatar', userData.avatar ? userData.avatar : '');
-  localStorage.setItem('credits', userData.credits ? userData.credits : '');
-};*/
-
 // Redirect to the profile page
 const redirectToProfilePage = () => {
-  window.location.href = '/src/html/pages/profile.html';
+  window.location.href = './src/html/pages/profile.html';
+};*/
+
+// Redirect to the profile page dynamically including the repository name
+const redirectToProfilePage = () => {
+  const isGitHubPages = window.location.hostname.includes('github.io');
+  const repositoryName = isGitHubPages ? window.location.pathname.split('/')[1] : '';
+  const profilePagePath = `${repositoryName}/src/html/pages/profile.html`;
+  window.location.href = `${window.location.origin}/${profilePagePath}`;
 };
