@@ -81,6 +81,17 @@
       </div>
     </div>
 
+    <!-- Dropdown menu for sorting -->
+  <div class="text-center mt-4 mb-8">
+    <select id="sort_dropdown" 
+    class="px-2 py-1 w-[200px] rounded-md bg-dark_gray text-white font-semibold">
+      <option value="latest">Latest</option>
+      <option value="oldest">Oldest</option>
+      <option value="most_bids">Most Bids</option>
+      <option value="least_bids">Least Bids</option>
+    </select>
+  </div>
+
     <section id="listings_section" 
     class="mx-auto gap-5 max-w-screen-xl flex flex-wrap justify-center"></section>
 
@@ -88,15 +99,6 @@
     <button id="add_listing_btn" class="fixed bottom-10 right-10 bg-listing_button 
     text-white w-12 h-12 rounded-full flex justify-center items-center z-40 text-4xl 
     font-bold align-middle -pt-1 pb-1.5">+</button>
-
-    <!--
-    <button id="add_listing_btn" class="fixed bottom-10 right-10 bg-listing_button text-white 
-    w-12 h-12 rounded-full flex justify-center items-center transition duration-300 ease-in-out 
-    focus:outline-none z-50 text-4xl font-bold mb-2">
-      <span id="add_button_icon" class="text-4xl font-bold mb-2">+</span>
-      <span id="add_button_text" class="hidden ml-2 bg-dark_gray text-white py-1 px-2 rounded 
-      opacity-0 transition duration-300 ease-in-out">Add listing</span>
-    </button>-->
 
     <!-- 
       Add listing form
@@ -121,16 +123,6 @@
           <input id="add_date" type="datetime-local" placeholder="End-date & time" name="endsAt" 
           class="rounded-md px-3 py-1 my-2 text-black w-3/4">
         </div>
-
-        <!--<div class="w-3/4 flex flex-row pt-1 my-2 justify-center mx-auto">
-          <input id="add_image" type="url" placeholder="Image url" name="image"
-          class="w-11/12 md:w-[430px] rounded-l-md px-3 text-black">
-          <button id="add_input_button" class="bg-button_blue text-white text-2xl font-bold
-          text-center align-middle px-2 rounded-r-md">+</button>
-        </div>
-        
-        <div id="image_container" 
-        class="w-3/4 flex flex-col pb-1 my-2 gap-y-2 justify-center mx-auto"></div>-->
 
         <div id="image_container" 
         class="w-3/4 flex flex-col pb-1 my-2 gap-y-2 justify-center mx-auto">

@@ -18,8 +18,8 @@ export const fetchListings = async () => {
     }
 
     const data = await response.json();
-    // Update the localStorage with the fetched data
-    save('listingsData', data); // Assuming you have a save function to store data in localStorage
+
+    save('listingsData', data);
 
     return data;
   } catch (error) {
@@ -30,23 +30,30 @@ export const fetchListings = async () => {
 
 // Function to display seller information
 const displaySellerInfo = (seller) => {
-  // Render seller avatar, if available
+  // Seller avatar, if available
   if (seller.avatar) {
     const sellerAvatarElement = document.createElement('img');
     sellerAvatarElement.src = seller.avatar;
     sellerAvatarElement.alt = 'Seller Avatar';
     sellerAvatarElement.className = 'w-[50px] h-[50px] rounded-full bg-cover';
     document.querySelector('#seller-avatar').appendChild(sellerAvatarElement);
+  } 
+  else {
+    const defaultAvatar = '../../images/no_avatar.png';
+    
+    const sellerAvatarElement = document.createElement('img');
+    sellerAvatarElement.src = defaultAvatar;
+    sellerAvatarElement.alt = 'Default Avatar';
+    sellerAvatarElement.className = 'w-[50px] h-[50px] rounded-full bg-cover';
+    document.querySelector('#seller-avatar').appendChild(sellerAvatarElement);
   }
 
   const sellerElement = document.createElement('div');
   sellerElement.textContent = `Seller: ${seller.name}`;
-  //sellerElement.className = 'seller-info';
   document.querySelector('#seller-info').appendChild(sellerElement);
 
   const sellerEmailElement = document.createElement('div');
   sellerEmailElement.textContent = `Email: ${seller.email}`;
-  //sellerEmailElement.className = 'seller-email';
   document.querySelector('#seller-info').appendChild(sellerEmailElement);
 };
 
@@ -54,7 +61,6 @@ const displaySellerInfo = (seller) => {
 const displayBidders = (bids) => {
   const biddersContainer = document.querySelector('#listing_bidders');
   
-  // Clear existing bid information before updating
   biddersContainer.innerHTML = '';
 
   if (bids.length > 0) {
@@ -87,9 +93,7 @@ const displayBidders = (bids) => {
 // Find the selected listing by its ID
 const selectedListing = listings.find(listing => listing.id === listingId);
 
-// Subscribe to the bidSubmitted event
 document.addEventListener('bidSubmitted', async () => {
-  // Fetch and update the selected listing details
   const updatedListings = await fetchListings();
   save('listingsData', updatedListings);
 
@@ -128,16 +132,15 @@ if (selectedListing) {
     thumbnailElement.alt = selectedListing.title;
     thumbnailElement.className = 'mx-2 my-5 cursor-pointer w-[80px] min-w-[80px] max-w-[80px] h-[60px] min-h-[60px] max-h-[60px] object-cover rounded-lg';
   
-    // Event listener to change the main image when a thumbnail is clicked
+    // Click on image to change main image
     thumbnailElement.addEventListener('click', () => {
       mediaElement.src = imageUrl;
     });
   
-    // Append thumbnail to the carousel container
     carouselContainer.appendChild(thumbnailElement);
   });
 
-  // Set the placeholder image URL
+  // If there is no image
   const placeholderImageUrl = '../../images/no_image.png';
   
   // Use the first image from the listing's media if available
@@ -182,11 +185,10 @@ if (selectedListing) {
   const datesSection = document.createElement('div');
   datesSection.className = 'md:mt-12 text-left';
 
-  // Replace the logic for EndsAt Date with Live Countdown
+  // Replace the EndsAt Date with Live Countdown
   const endsAtDateElement = document.createElement('h2');
-  endsAtDateElement.className = 'endsAtCountdown'; // Add a class for easy identification
+  endsAtDateElement.className = 'endsAtCountdown';
 
-  // Append to the respective section
   document.querySelector('#listing_dates').appendChild(endsAtDateElement);
 
   // Get the EndsAt timestamp from the selectedListing
@@ -206,14 +208,13 @@ if (selectedListing) {
     endsAtDateElement.textContent = `Ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     endsAtDateElement.className = 'text-2xl font-semibold';
 
-    // If the countdown is over, display an appropriate message
+    // Stops the countdown when time runs out
     if (distance < 0) {
       endsAtDateElement.textContent = "Auction has ended";
-      clearInterval(countdownInterval); // Stop the countdown when the auction ends
+      clearInterval(countdownInterval);
     }
   };
 
-  // Initial call to update the countdown
   updateCountdown();
 
   // Set up an interval to update the countdown every second

@@ -1,11 +1,8 @@
-//import { loadToken } from "../../storage/index.js";
 import { load } from "../../storage/index.js";
 import { baseUrl } from "../constants.js";
 
 export async function updateUserAvatar(avatarURL) {
   try {
-    //const token = loadToken();
-    //const username = localStorage.getItem('name');
     const token = load('accessToken');
     const username = load('name');
 
@@ -28,12 +25,9 @@ export async function updateUserAvatar(avatarURL) {
   catch (error) {
     console.error('Error updating avatar:', error);
     throw error;
-    // Handle error scenarios
   }
 }
 
 export function saveUpdatedAvatarToStorage(avatarURL) {
-  // Implement your logic to save the updated avatar URL to local storage or any preferred storage method
-  // For example:
   localStorage.setItem('avatar', avatarURL);
 }

@@ -1,12 +1,9 @@
-//import { loadToken } from '../../storage/index.js';
 import { load } from '../../storage/index.js';
 import { baseUrl } from '../constants.js';
 
 // Function to fetch listings for the logged-in user
 async function fetchUserListings() {
   try {
-    //const accessToken = loadToken();
-    //const username = localStorage.getItem('name');
     const accessToken = load('accessToken');
     const username = load('name');
 
@@ -47,10 +44,6 @@ function createListingElement(listing) {
   }
 
   imageElement.alt = listing.title;
-  /*
-  imageElement.src = listing.media[0];
-  imageElement.alt = listing.title;
-  */
 
   const titleElement = document.createElement('h3');
   titleElement.textContent = listing.title;
@@ -86,11 +79,8 @@ function renderListings(listings) {
 fetchUserListings()
   .then((userListings) => {
     renderListings(userListings);
-
-    // Handle the fetched listings here
     console.log('User listings:', userListings);
   })
   .catch((error) => {
-    // Handle any errors occurred during fetching
     console.error('Error fetching user listings:', error);
   });
