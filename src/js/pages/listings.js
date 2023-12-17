@@ -6,7 +6,6 @@ import { dateFormat } from '../format/date_format.js';
 // Function to fetch listings from the API
 export const fetchListings = async () => {
   try {
-    //const response = await fetch(`${baseUrl}listings?_active=true&sort=created`);
     const response = await fetch(`${baseUrl}listings?_active=true&sort=created&_seller=true&_bids=true`);
     
     if (!response.ok) {
@@ -15,10 +14,30 @@ export const fetchListings = async () => {
 
     const data = await response.json();
     return data;
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error fetching listings:', error);
     return [];
   }
+};
+
+// Function to sort listings based on selected option
+const sortListings = (listings, sortBy) => {
+  if (sortBy === 'oldest') {
+    listings.sort((a, b) => new Date(a.created) - new Date(b.created));
+  } 
+  else if (sortBy === 'most_bids') {
+    listings.sort((a, b) => b._count.bids - a._count.bids);
+  } 
+  else if (sortBy === 'least_bids') {
+    listings.sort((a, b) => a._count.bids - b._count.bids);
+  } 
+  else {
+    // Default sorting by latest
+    listings.sort((a, b) => new Date(b.created) - new Date(a.created));
+  }
+
+  return listings;
 };
 
 export const displayListings = (listings) => {
@@ -40,7 +59,6 @@ export const displayListings = (listings) => {
 
     // Either media image or no image
     const imageSrc = listing.media.length > 0 ? listing.media[0] : placeholderImageUrl;
-    // <img src="${listing.media[0] ? listing.media[0] : ""}"
     
     // Construct the HTML for each listing item
     listingElement.innerHTML = `
@@ -67,7 +85,6 @@ export const displayListings = (listings) => {
 
     // Make the live countdown
     const countdownElement = listingElement.querySelector('.listing_date');
-    //const endTime = new Date(listing.endsAt).getTime();
 
     if (countdownElement) {
       const endTime = new Date(listing.endsAt).getTime();
@@ -78,7 +95,7 @@ export const displayListings = (listings) => {
         const distance = endTime - now;
 
         if (distance <= 0) {
-          countdownElement.innerHTML = 'Expired'; // Display 'Expired' if the time is up
+          countdownElement.innerHTML = 'Expired';
           return;
         }
 
@@ -97,10 +114,28 @@ export const displayListings = (listings) => {
       setInterval(updateCountdown, 1000);
     }
 
-    // Append each listing element to the section
     section.appendChild(listingElement);
   });
 };
+
+// Fetch listings and display on page load
+fetchListings().then((fetchedListings) => {
+  save('listingsData', fetchedListings);
+  displayListings(fetchedListings);
+});
+
+// Handle dropdown change event to sort listings
+const dropdown = document.getElementById('sort_dropdown');
+
+dropdown.addEventListener('change', () => {
+  const selectedSortOption = dropdown.value;
+  const storedListings = JSON.parse(localStorage.getItem('listingsData'));
+
+  if (storedListings && storedListings.length > 0) {
+    const sortedListings = sortListings([...storedListings], selectedSortOption);
+    displayListings(sortedListings);
+  }
+});
 
 fetchListings()
   .then(listings => {

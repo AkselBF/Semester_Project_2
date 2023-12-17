@@ -1,5 +1,6 @@
 import { baseUrl } from "../../api/constants.js";
-import { load, save } from "../../storage/index.js";
+import { headers } from "../../api/headers.js";
+import { save } from "../../storage/index.js";
 import { selectedListing, fetchListings } from "../../pages/details.js";
 
 // Get necessary elements by their IDs
@@ -53,7 +54,7 @@ submitButton.style.opacity = '0.5';
 // Update border color as user types
 bidAmountInput.addEventListener('input', () => {
   const userBidAmount = parseFloat(bidAmountInput.value);
-  let latestBidAmount = 0; // Default value if there's no bid yet
+  let latestBidAmount = 0;
 
   if (latestBidElement) {
     const latestBidText = latestBidElement.textContent;
@@ -76,20 +77,14 @@ bidAmountInput.addEventListener('input', () => {
 // Handling form submission
 bidForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  //console.log('API URL:', `${baseUrl}listings/${selectedListing.id}/bids`);
   
   // Extract the bid amount entered by the user
   const bidAmount = parseFloat(document.querySelector('#bid_amount').value);
-  const accessToken = load('accessToken');
 
   try {
-    // Make a request to the API to add a bid to the listing
     const response = await fetch(`${baseUrl}listings/${selectedListing.id}/bids`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-      },
+      headers: headers('application/json'),
       body: JSON.stringify({ amount: bidAmount }),
     });
 

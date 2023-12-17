@@ -1,5 +1,4 @@
-//import { loadToken } from "../../storage/index.js";
-//import { headers } from "../../api/headers.js";
+import { headers } from "../../api/headers.js";
 import { load } from "../../storage/index.js";
 import { baseUrl } from "../../api/constants.js";
 import { displayListings, fetchListings } from '../../pages/listings.js';
@@ -30,10 +29,6 @@ function closeAddingForm() {
 
   addSubmit.disabled = true;
   addSubmit.style.opacity = '0.5';
-
-  //addTitleInput.style.border = '';
-  //addDescriptionInput.style.border = '';
-  //addDateInput.style.border = '';
 
   document.querySelector('#add_form').reset();
 }
@@ -119,19 +114,8 @@ document.querySelector('#add_form').addEventListener('submit', async (event) => 
 
   const addTitle = addTitleInput.value;
   const addDescription = addDescriptionInput.value;
-  //const addImage = document.querySelector('#add_image').value;
   const addDate = addDateInput.value;
-
   const dateWithoutTime = `${addDate}`;
-
-  /*
-  // Create a new listing object
-  const newListing = {
-    title: addTitle,
-    description: addDescription,
-    media: [addImage],
-    endsAt: dateWithoutTime,
-  };*/
 
   // Get all image inputs
   const imageInputs = document.querySelectorAll('#image_container input');
@@ -152,16 +136,11 @@ document.querySelector('#add_form').addEventListener('submit', async (event) => 
   console.log(newListing);
 
   try {
-    //const accessToken = loadToken()
-    const accessToken = load('accessToken');
-
+    //const accessToken = load('accessToken');
     // Send a request to the api to add the new listing
     const response = await fetch(`${baseUrl}listings`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-      },
+      headers: headers('application/json'),
       body: JSON.stringify(newListing),
     });
 
@@ -175,51 +154,24 @@ document.querySelector('#add_form').addEventListener('submit', async (event) => 
     // Fetch and display updated listings
     const updatedListings = await fetchListings();
     displayListings(updatedListings);
+
+    window.location.reload();
   } 
   catch (error) {
     console.error('Error adding a new listing:', error);
   }
 });
 
-/*
-  Extra
-*/
+// Validate inputs
 addTitleInput.addEventListener('input', () => {
-  /*
-  const listingTitle = addTitleInput.value.trim();
-
-  if (listingTitle.length < 1) {
-    addTitleInput.style.border = '';
-  } else {
-    addTitleInput.style.border = '2px solid #0eff00';
-  }*/
-
   validateListing();
 })
 
 addDescriptionInput.addEventListener('input', () => {
-  /*
-  const listingDesc = addDescriptionInput.value.trim();
-
-  if (listingDesc.length < 1) {
-    addDescriptionInput.style.border = '';
-  } else {
-    addDescriptionInput.style.border = '2px solid #0eff00';
-  }*/
-
   validateListing();
 })
 
 addDateInput.addEventListener('input', () => {
-  /*
-  const listingDate = addDateInput.value.trim();
-
-  if (listingDate.length < 1) {
-    addDateInput.style.border = '';
-  } else {
-    addDateInput.style.border = '2px solid #0eff00';
-  }*/
-
   validateListing();
 })
 

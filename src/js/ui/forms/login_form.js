@@ -53,17 +53,6 @@ document.querySelector('#log_form').addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
-/*
-// Handling form submission
-document.querySelector('#log_form').addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const loginEmail = document.querySelector('#login_email').value;
-  const loginPassword = document.querySelector('#login_password').value;
-
-  loginUser(loginEmail, loginPassword);
-});*/
-
 // Handling form submission
 document.querySelector('#log_form').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -74,10 +63,7 @@ document.querySelector('#log_form').addEventListener('submit', (event) => {
   loginUser(loginEmail, loginPassword);
 });
 
-
-/*
-  For better form validation
-*/
+// For better form validation
 loginEmailInput.addEventListener('input', () => {
   validateForm();
 })
@@ -90,9 +76,8 @@ loginPasswordInput.addEventListener('input', () => {
 function validateForm() {
   const emailValid = /^[a-zA-Z0-9._-]+@(noroff\.no|stud\.noroff\.no)$/.test(loginEmailInput.value.trim());
   const passwordValid = loginPasswordInput.value.trim().length >= 8;
-  //const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/.test(loginPasswordInput.value.trim());
 
-  // Enable submit button only if all inputs are valid
+  // Enable submit button only if both inputs are valid
   if (emailValid && passwordValid) {
     loginSubmit.disabled = false;
     loginSubmit.style.opacity = '1';

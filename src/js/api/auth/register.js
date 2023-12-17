@@ -7,7 +7,9 @@ export const registerUser = async (name, email, password, avatar) => {
     
     console.log(response);
     return response;
-  } catch (error) {
-    throw error;
+  } 
+  catch (error) {
+    throw new Error('Failed to register user');
+    //throw error;
   }
 };

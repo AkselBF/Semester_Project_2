@@ -62,20 +62,6 @@ document.querySelector('#register_form').addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
-/*
-// Handling form submission
-document.querySelector('#register_form').addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const registerName = document.querySelector('#register_name').value;
-  const registerEmail = document.querySelector('#register_email').value;
-  const registerPassword = document.querySelector('#register_password').value;
-  const registerAvatar = document.querySelector('#register_avatar').value;
-  
-  registerUser(registerName, registerEmail, registerPassword, registerAvatar);
-});
-*/
-
 // Handling form submission
 document.querySelector('#register_form').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -86,35 +72,20 @@ document.querySelector('#register_form').addEventListener('submit', (event) => {
   const registerAvatar = registerAvatarInput.value;
   
   registerUser(registerName, registerEmail, registerPassword, registerAvatar);
+  closeRegistrationForm();
 });
 
-
-/*
-  Extra
-*/
+// For better form validation
+// Name input
 registerNameInput.addEventListener('input', () => {
-  // For name input
-  const name = registerNameInput.value.trim();
-
-  /*
-  if (name.length < 1) {
-    registerNameInput.style.border = '2px solid red';
-    nameError.textContent = 'User name needed';
-    nameError.style.display = 'block';
-  } 
-  else {
-    registerNameInput.style.border = '2px solid #0eff00';
-    nameError.textContent = '';
-    nameError.style.display = 'none';
-  }*/
-
   validateForm();
 })
 
+// Email input
 registerEmailInput.addEventListener('input', () => {
-  // For email input
   const email = registerEmailInput.value.trim();
-  const emailPattern = /^(?=.*[@])(?=.*\.(?=.{2,}))(?=.*\b(?:noroff\.no|stud\.noroff\.no)$).+/i;
+  const emailPattern = /^(?=.*[@])(?=.*\.)(?=.*\bstud\.noroff\.no$).+/i;
+  //const emailPattern = /^(?=.*[@])(?=.*\.(?=.{2,}))(?=.*\b(?:noroff\.no|stud\.noroff\.no)$).+/i;
 
   if (email === '') {
     emailError.textContent = '';
@@ -136,34 +107,13 @@ registerEmailInput.addEventListener('input', () => {
   validateForm();
 })
 
+// Password input
 registerPasswordInput.addEventListener('input', () => {
-  // For password input
-  const password = registerPasswordInput.value.trim();
-  const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-  if (password === '') {
-    passwordError.textContent = '';
-    registerPasswordInput.style.border = '';
-    return;
-  }
-
-  if (!passwordPattern.test(password)) {
-    registerPasswordInput.style.border = '2px solid red';
-    passwordError.textContent = 'Invalid password';
-    passwordError.style.display = 'block';
-  } 
-  else {
-    registerPasswordInput.style.border = '2px solid #0eff00';
-    passwordError.textContent = '';
-    passwordError.style.display = 'none';
-  }
-
   validateForm();
 })
 
 // Validate if the avatar is valid if needed
 registerAvatarInput.addEventListener('input', () => {
-  // For avatar input
   const avatarUrl = registerAvatarInput.value.trim();
   const avatarRegex = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
 
@@ -190,7 +140,6 @@ function validateForm() {
   const nameValid = registerNameInput.value.trim().length >= 1;
   const emailValid = /^[a-zA-Z0-9._-]+@(noroff\.no|stud\.noroff\.no)$/.test(registerEmailInput.value.trim());
   const passwordValid = registerPasswordInput.value.trim().length >= 8;
-  //const passwordValid = /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/.test(registerPasswordInput.value.trim());
 
   const avatarUrl = registerAvatarInput.value.trim();
   const avatarRegex = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
@@ -213,5 +162,4 @@ registerEmailInput.addEventListener('input', validateForm);
 registerPasswordInput.addEventListener('input', validateForm);
 registerAvatarInput.addEventListener('input', validateForm);
 
-// Initial validation check on page load
 validateForm();

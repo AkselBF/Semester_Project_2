@@ -1,12 +1,8 @@
 import { baseUrl } from '../constants.js';
 import { headers } from '../headers.js';
-import { load } from '../../storage/index.js';
 
 // Function to make authenticated API requests
 export const authenticatedRequest = async (endpoint, method = 'GET', data = null) => {
-  const token = load('accessToken');
-  //console.log(data);
-
   const requestOptions = {
     method,
     headers: headers('application/json'),

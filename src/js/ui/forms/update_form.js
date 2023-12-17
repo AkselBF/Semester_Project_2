@@ -2,7 +2,6 @@ import { updateUserAvatar, saveUpdatedAvatarToStorage } from '../../api/auth/upd
 
 // Get necessary elements by their IDs
 const avatarWrapper = document.querySelector('#avatar_wrapper');
-//const avatarTooltip = document.querySelector('#avatar_tooltip');
 const updateAvatarForm = document.querySelector('#update_avatar_form');
 const updateClose = document.querySelector('#update_close');
 const profileAvatar = document.querySelector('#profile_avatar');
@@ -42,7 +41,7 @@ document.querySelector('#update_form').addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
-// Event listener for submitting the update form (you can add your logic here)
+// Event listener for submitting the update form
 document.querySelector('#update_form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -50,24 +49,17 @@ document.querySelector('#update_form').addEventListener('submit', async (event) 
 
   try {
     const updatedAvatar = await updateUserAvatar(updatedImageUrl);
-
     profileAvatar.src = updatedAvatar;
 
     closeUpdateAvatarForm();
-
     saveUpdatedAvatarToStorage(updatedAvatar);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error updating avatar:', error);
-    // Handle error scenarios
   }
 
-  // Perform the necessary logic to update the avatar image with the new URL
-  // For example, you can update the profileAvatar.src here
   profileAvatar.src = updatedImageUrl;
-
-  // To save the avatar even when refreshing
   localStorage.setItem('avatar', updatedImageUrl);
 
-  // Close the form after updating the image (if needed)
   closeUpdateAvatarForm();
 });
