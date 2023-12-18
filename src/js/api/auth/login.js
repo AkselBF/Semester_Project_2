@@ -1,7 +1,6 @@
 import { authenticatedRequest } from './api.js';
 import { save } from '../../storage/index.js';
 
-
 // Function for login request
 export const loginUser = async (email, password) => {
   try {
@@ -11,8 +10,7 @@ export const loginUser = async (email, password) => {
     return response;
   } 
   catch (error) {
-    //console.error(error);
-    throw new Error('Failed to log in');
+    throw error;
   }
 };
 
