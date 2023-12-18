@@ -31,6 +31,16 @@ function closeAddingForm() {
   addSubmit.style.opacity = '0.5';
 
   document.querySelector('#add_form').reset();
+
+  resetImageInputBorders();
+}
+
+// Function to reset the border colors of image inputs
+function resetImageInputBorders() {
+  const imageInputs = document.querySelectorAll('#image_container input');
+  imageInputs.forEach(input => {
+    input.style.border = '';
+  });
 }
 
 // If the user is logged in

@@ -53,14 +53,35 @@ document.querySelector('#log_form').addEventListener('click', (event) => {
   event.stopPropagation();
 });
 
+// The error in the login file appear in the form, rather than in the console
+const loginErrorMessage = document.querySelector('#error_message');
+
+// Function to display error message in the login form
+function displayErrorMessage(message) {
+  loginErrorMessage.textContent = message;
+  loginErrorMessage.style.display = 'block';
+}
+
+// Function to clear error message in the login form
+function clearErrorMessage() {
+  loginErrorMessage.textContent = '';
+  loginErrorMessage.style.display = 'none';
+}
+
 // Handling form submission
-document.querySelector('#log_form').addEventListener('submit', (event) => {
+document.querySelector('#log_form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const loginEmail = loginEmailInput.value;
   const loginPassword = loginPasswordInput.value;
 
-  loginUser(loginEmail, loginPassword);
+  try {
+    clearErrorMessage();
+    await loginUser(loginEmail, loginPassword);
+  } catch (error) {
+    const errorMessage = error?.message || 'An error has occurred';
+    displayErrorMessage(errorMessage);
+  }
 });
 
 // For better form validation
