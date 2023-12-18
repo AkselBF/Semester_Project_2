@@ -1,5 +1,9 @@
 # Semester project 2: Day-Night Auction
 
+[![Automated Unit Testing](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml/badge.svg)](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml) 
+
+---
+
 This is my project, and take on making an auction website. The way this site works and how to navigate it will be written down bellow.
 
 ## Getting started
