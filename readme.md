@@ -1,6 +1,6 @@
 # Semester project 2: Day-Night Auction
 
-[![Automated Unit Testing](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml/badge.svg)](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml) 
+[![Automated Unit Testing](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml/badge.svg)](https://github.com/AkselBF/Semester_Project_2/actions/workflows/unit-test.yml) [![Automated e2e testing](https://github.com/AkselBF/Semester_Project_2/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/AkselBF/Semester_Project_2/actions/workflows/e2e-test.yml)
 
 ---
 

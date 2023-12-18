@@ -175,12 +175,38 @@ addDateInput.addEventListener('input', () => {
   validateListing();
 })
 
+// Function to validate image URLs
+function isValidImageUrl(url) {
+  const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+
+  return url === '' || (urlPattern.test(url) && /\.(jpeg|jpg|gif|png|svg)$/.test(url));
+}
+
+// Function to validate all image inputs
+function validateImageInputs() {
+  const imageInputs = document.querySelectorAll('#image_container input');
+
+  let valid = true;
+
+  imageInputs.forEach(input => {
+    if (!isValidImageUrl(input.value)) {
+      input.style.border = '2px solid red';
+      valid = false;
+    } else {
+      input.style.border = '';
+    }
+  });
+
+  return valid;
+}
+
 function validateListing() {
   const titleValid = addTitleInput.value.trim().length >= 1;
   const descValid = addDescriptionInput.value.trim().length >= 1;
   const dateValid = addDateInput.value.trim().length >= 1;
+  const imageInputsValid = validateImageInputs();
 
-  if (titleValid && descValid && dateValid) {
+  if (titleValid && descValid && dateValid && imageInputsValid) {
     addSubmit.disabled = false;
     addSubmit.style.opacity = '1';
   } else {
@@ -188,3 +214,5 @@ function validateListing() {
     addSubmit.style.opacity = '0.5';
   }
 }
+
+imageContainer.addEventListener('input', validateListing);
