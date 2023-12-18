@@ -57,36 +57,57 @@ const displaySellerInfo = (seller) => {
   document.querySelector('#seller-info').appendChild(sellerEmailElement);
 };
 
+const displaySelectedBid = (bid) => {
+  console.log('Selected bid: ', bid);
+}
+
 // Function to display bidder information
 const displayBidders = (bids) => {
   const biddersContainer = document.querySelector('#listing_bidders');
+  const dropdown = document.createElement('select');
+  
   
   biddersContainer.innerHTML = '';
 
   if (bids.length > 0) {
-    const sortedBids = bids.sort((a, b) => new Date(b.created) - new Date(a.created));
-    
-    const latestBid = sortedBids[0];
+    const sortedBids = bids.sort((a, b) => b.amount - a.amount);
 
-    const bidderElement = document.createElement('div');
-    bidderElement.textContent = `Winning bid: ${latestBid.bidderName} - ${latestBid.amount} Credits`;
-    bidderElement.className = 'bidder-amount font-semibold';
+    const selectElement = document.createElement('select');
+    selectElement.multiple = true;
+    selectElement.size = Math.min(bids.length, 3);
+    dropdown.style.backgroundColor = '#1E1E1E';
+    dropdown.className = 'bidders-dropdown px-2 text-center sm:text-left';
 
-    biddersContainer.appendChild(bidderElement);
+    sortedBids.forEach(bid => {
+      const option = document.createElement('option');
+      option.textContent = `${bid.bidderName} - ${bid.amount} Credits`;
+      option.value = JSON.stringify(bid);
+      dropdown.appendChild(option);
+    });
+
+    dropdown.addEventListener('change', (event) => {
+      const selectedBid = JSON.parse(event.target.value);
+      displaySelectedBid(selectedBid);
+    });
+
+    biddersContainer.appendChild(dropdown);
+
+    // Display details of the highest bid by default
+    const highestBid = sortedBids[0];
+    displaySelectedBid(highestBid);
   } 
   else {
     const noBidsElement = document.createElement('div');
     noBidsElement.textContent = 'No bids yet.';
     noBidsElement.className = 'no-bids font-semibold';
-
     biddersContainer.appendChild(noBidsElement);
   }
 
-  // Update the number of bids
   const bidsCountElement = document.querySelector('.bids-count');
 
   if (bidsCountElement) {
     bidsCountElement.textContent = `Number of bids: ${bids.length}`;
+    bidsCountElement.classList.add('mt-[20px]', 'text-center', 'md:mt-[0]', 'md:text-right');
   }
 };
 
