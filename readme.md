@@ -1,11 +1,8 @@
 # Semester project 2: Day-Night Auction
----
 
 This is my project, and take on making an auction website. The way this site works and how to navigate it will be written down bellow.
 
-
 ## Getting started
----
 
 These instructions will help you clone the project and run it.
 
@@ -22,7 +19,6 @@ npm run tailwind
 ---
 
 ## Navigation
----
 
 Here are a list of pages the site has:
 * Startup page
@@ -90,3 +86,15 @@ To place bid, just click on the place bid button, fill the input with a higher n
 When logging out, the user is redirected back to the startup page. Their accessibility becomes more limited once again. You must login again to be able to access the profile page, add listings or place bids.
 
 ---
+
+## Testing
+
+### For unit-testing
+```bash
+npm run test-unit
+```
+
+### For e2e-testing
+```bash
+npm run test-e2e
+```
